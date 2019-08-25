@@ -130,6 +130,30 @@ namespace MsgServer.Network.GameServer.Handlers
                         }
                     }
 
+                    #region Initial HairStyle and Lookface for monks
+                    switch (profession)
+                    {
+                        case ProfessionType.INTERN_MONK:
+                            if (pMsg.Body == (ushort)BodyType.THIN_MALE)
+                            {
+                                lookface = (uint)(new Random().Next(109, 113));
+                                hair = 400;
+                            } else if (pMsg.Body == (ushort)BodyType.HEAVY_MALE)
+                            {
+                                lookface = (uint)(new Random().Next(129, 133));
+                                hair = 400;
+                            } else if (pMsg.Body == (ushort)BodyType.THIN_FEMALE)
+                            {
+                                lookface = (uint)(new Random().Next(300, 304));
+                            }
+                            else if (pMsg.Body == (ushort)BodyType.HEAVY_FEMALE)
+                            {
+                                lookface = (uint)(new Random().Next(325, 329));
+                            }
+                            break;
+                    }
+                    #endregion
+
                     DbPointAllot points =
                         ServerKernel.PointAllot.Values.FirstOrDefault(
                             x => x.Profession == ((pMsg.Profession - (pMsg.Profession % 10)) / 10) && x.Level == 1);
@@ -292,19 +316,21 @@ namespace MsgServer.Network.GameServer.Handlers
         {
             Item item = null;
 
-            uint[] dwMonkItems = { 143009, 120009, 136009, 300000, 610029, 610029, 151019, 160019, 201009, 202009, 203009 };
-            uint[] dwTrojanItems = { 118009, 120009, 130009, 300000, 410029, 480029, 150019, 160019, 201009, 202009, 203009 };
-            uint[] dwWarriorItems = { 111009, 120009, 131009, 300000, 561029, 150019, 160019, 201009, 202009, 203009 };
-            uint[] dwTaoistItems = { 114009, 121009, 134009, 300000, 421029, 152019, 160019, 201009, 202009, 203009 };
-            uint[] dwArcherItems = { 113009, 120009, 133009, 300000, 500019, 150019, 160019, 201009, 202009, 203009 };
-            uint[] dwNinjaItems = { 112009, 120009, 135009, 300000, 601029, 601029, 150019, 160019, 201009, 202009, 203009 };
+            uint[] dwMonkItems = { 143006, 120006, 136006, 300000, 610026, 610026, 151016, 160016, 201006, 202006, 203006 };
+            uint[] dwTrojanItems = { 118006, 120006, 130006, 300000, 410026, 480026, 150016, 160016, 201006, 202006, 203006 };
+            uint[] dwWarriorItems = { 111006, 120006, 131006, 300000, 561026, 150016, 160016, 201006, 202006, 203006 };
+            uint[] dwTaoistItems = { 114006, 121006, 134006, 300000, 421026, 152016, 160016, 201006, 202006, 203006 };
+            uint[] dwArcherItems = { 113006, 120006, 133006, 300000, 500016, 150016, 160016, 201006, 202006, 203006 };
+            uint[] dwNinjaItems = { 112006, 120006, 135006, 300000, 601026, 601026, 150016, 160016, 201006, 202006, 203006 };
 
             #region Class Items
 
             for (int i = 0; i < 9; i++)
             {
-                item = new Item();
-                item.StackAmount = 1;
+                item = new Item
+                {
+                    StackAmount = 1
+                };
                 switch (i)
                 {
                     case 0:
@@ -394,39 +420,41 @@ namespace MsgServer.Network.GameServer.Handlers
 
             foreach (var idType in list)
             {
-                item = new Item();
-                item.Type = idType;
-                item.PlayerIdentity = idRole;
-                item.Bound = true;
-                item.Plus = 5;
-                item.Position = 0;
-                item.StackAmount = 1;
-                if (!item.IsMount() && (item.GetItemSubtype() < 200 || item.GetItemSubtype() > 203))
+                item = new Item
                 {
-                    item.ReduceDamage = 3;
-                    item.Enchantment = 100;
-                }
-                if (item.IsEquipment() 
-                    && (item.GetItemSubtype() < 200 || item.GetItemSubtype() > 203) 
-                    && item.Type != 300000)
-                {
-                    if (profession == ProfessionType.TAOIST)
-                    {
-                        item.SocketOne = SocketGem.REFINED_PHOENIX_GEM;
-                    }
-                    else
-                    {
-                        item.SocketOne = SocketGem.REFINED_DRAGON_GEM;
-                    }
-                }
-                else if (item.GetItemSubtype() == 201)
-                {
-                    item.SocketOne = SocketGem.REFINED_THUNDER_GEM;
-                }
-                else if (item.GetItemSubtype() == 202)
-                {
-                    item.SocketOne = SocketGem.REFINED_GLORY_GEM;
-                }
+                    Type = idType,
+                    PlayerIdentity = idRole,
+                    Bound = true,
+                    Plus = 0,
+                    Position = 0,
+                    StackAmount = 1
+                };
+                //if (!item.IsMount() && (item.GetItemSubtype() < 200 || item.GetItemSubtype() > 203))
+                //{
+                //    item.ReduceDamage = 3;
+                //    item.Enchantment = 100;
+                //}
+                //if (item.IsEquipment() 
+                //    && (item.GetItemSubtype() < 200 || item.GetItemSubtype() > 203) 
+                //    && item.Type != 300000)
+                //{
+                //    if (profession == ProfessionType.TAOIST)
+                //    {
+                //        item.SocketOne = SocketGem.REFINED_PHOENIX_GEM;
+                //    }
+                //    else
+                //    {
+                //        item.SocketOne = SocketGem.REFINED_DRAGON_GEM;
+                //    }
+                //}
+                //else if (item.GetItemSubtype() == 201)
+                //{
+                //    item.SocketOne = SocketGem.REFINED_THUNDER_GEM;
+                //}
+                //else if (item.GetItemSubtype() == 202)
+                //{
+                //    item.SocketOne = SocketGem.REFINED_GLORY_GEM;
+                //}
                 item.Save();
             }
 
@@ -438,14 +466,16 @@ namespace MsgServer.Network.GameServer.Handlers
             {
                 case ProfessionType.INTERN_MONK:
                 {
-                    DbMagic mgc = new DbMagic();
-                    mgc.OwnerId = idRole;
-                    mgc.Type = 10490;
-                    Database.Magics.SaveOrUpdate(mgc);
+                        DbMagic mgc = new DbMagic
+                        {
+                            OwnerId = idRole,
+                            Type = 10490
+                        };
+                        Database.Magics.SaveOrUpdate(mgc);
                     break;
                 }
             }
-            
+
             #endregion
         }
     }
