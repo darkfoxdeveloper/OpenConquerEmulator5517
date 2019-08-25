@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EE0866AE-BCA7-4FFC-9C8D-30012FBC4EDF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MsgServer</RootNamespace>
+    <AssemblyName>MsgServer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>cq.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4137.9283, Culture=neutral, PublicKeyToken=a4292a325f69b123, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="ManagedOpenSsl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ManagedOpenSsl.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database.cs" />
+    <Compile Include="Network\Client.cs" />
+    <Compile Include="Network\GameServer\Game Packet Handler.cs" />
+    <Compile Include="Network\GameServer\Game Socket.cs" />
+    <Compile Include="Network\GameServer\Handlers\10005 - MsgWalk.cs" />
+    <Compile Include="Network\GameServer\Handlers\1001 - MsgRegister.cs" />
+    <Compile Include="Network\GameServer\Handlers\10010 - MsgAction.cs" />
+    <Compile Include="Network\GameServer\Handlers\1004 - MsgTalk.cs" />
+    <Compile Include="Network\GameServer\Handlers\1009 - MsgItem.cs" />
+    <Compile Include="Network\GameServer\Handlers\1015 - MsgName.cs" />
+    <Compile Include="Network\GameServer\Handlers\1019 - MsgFriend.cs" />
+    <Compile Include="Network\GameServer\Handlers\1022 - MsgInteract.cs" />
+    <Compile Include="Network\GameServer\Handlers\1023 - MsgTeam.cs" />
+    <Compile Include="Network\GameServer\Handlers\1024 - MsgAllot.cs" />
+    <Compile Include="Network\GameServer\Handlers\1027 - MsgGemEmbed.cs" />
+    <Compile Include="Network\GameServer\Handlers\1038 - MsgSolidify.cs" />
+    <Compile Include="Network\GameServer\Handlers\1052 - MsgConnect.cs" />
+    <Compile Include="Network\GameServer\Handlers\1056 - MsgTrade.cs" />
+    <Compile Include="Network\GameServer\Handlers\1063 - MsgSelfSynMemAwardRank.cs" />
+    <Compile Include="Network\GameServer\Handlers\1066 - MsgMeteSpecial.cs" />
+    <Compile Include="Network\GameServer\Handlers\1101 - MsgMapItem.cs" />
+    <Compile Include="Network\GameServer\Handlers\1102 - MsgAccountSoftKb.cs" />
+    <Compile Include="Network\GameServer\Handlers\1107 - MsgSyndicate.cs" />
+    <Compile Include="Network\GameServer\Handlers\1128 - MsgVipUserHandle.cs" />
+    <Compile Include="Network\GameServer\Handlers\1130 - MsgTitle.cs" />
+    <Compile Include="Network\GameServer\Handlers\1150 - MsgFlower.cs" />
+    <Compile Include="Network\GameServer\Handlers\1151 - MsgRank.cs" />
+    <Compile Include="Network\GameServer\Handlers\1312 - MsgFamily.cs" />
+    <Compile Include="Network\GameServer\Handlers\1313 - MsgFamilyOccupy.cs" />
+    <Compile Include="Network\GameServer\Handlers\2030 - MsgNpcInfo.cs" />
+    <Compile Include="Network\GameServer\Handlers\2032 - MsgTaskDialog.cs" />
+    <Compile Include="Network\GameServer\Handlers\2036 - MsgDataArray.cs" />
+    <Compile Include="Network\GameServer\Handlers\2046 - MsgTradeBuddy.cs" />
+    <Compile Include="Network\GameServer\Handlers\2048 - MsgEquipLock.cs" />
+    <Compile Include="Network\GameServer\Handlers\2050 - MsgPigeon.cs" />
+    <Compile Include="Network\GameServer\Handlers\2064 - MsgPeerage.cs" />
+    <Compile Include="Network\GameServer\Handlers\2065 - MsgGuide.cs" />
+    <Compile Include="Network\GameServer\Handlers\2066 - MsgGuideInfo.cs" />
+    <Compile Include="Network\GameServer\Handlers\2067 - MsgGuideContribute.cs" />
+    <Compile Include="Network\GameServer\Handlers\2068 - MsgQuiz.cs" />
+    <Compile Include="Network\GameServer\Handlers\2076 - MsgQuench.cs" />
+    <Compile Include="Network\GameServer\Handlers\2080 - MsgChangeName.cs" />
+    <Compile Include="Network\GameServer\Handlers\2101 - MsgFactionRankInfo.cs" />
+    <Compile Include="Network\GameServer\Handlers\2102 - MsgSynMemberList.cs" />
+    <Compile Include="Network\GameServer\Handlers\2110 - MsgSuperFlag.cs" />
+    <Compile Include="Network\GameServer\Handlers\2202 - MsgWeaponsInfo.cs" />
+    <Compile Include="Network\GameServer\Handlers\2203 - MsgTotemPole.cs" />
+    <Compile Include="Network\GameServer\Handlers\2205 - MsgQualifyingInteractive.cs" />
+    <Compile Include="Network\GameServer\Handlers\2206 - MsgQualifyingFightersList.cs" />
+    <Compile Include="Network\GameServer\Handlers\2207 - MsgQualifyingRank.cs" />
+    <Compile Include="Network\GameServer\Handlers\2208 - MsgQualifyingSeasonRankList.cs" />
+    <Compile Include="Network\GameServer\Handlers\2209 - MsgQualifyingDetailInfo.cs" />
+    <Compile Include="Network\GameServer\Handlers\2211 - MsgArenicWitness.cs" />
+    <Compile Include="Network\GameServer\Handlers\2219 - MsgPKEliteMatchInfo.cs" />
+    <Compile Include="Network\GameServer\Handlers\2220 - MsgPkStatistic.cs" />
+    <Compile Include="Network\GameServer\Handlers\2223 - MsgElitePKGameRankInfo.cs" />
+    <Compile Include="Network\GameServer\Handlers\2224 - MsgWarFlag.cs" />
+    <Compile Include="Network\GameServer\Handlers\2225 - MsgSynAdvertising.cs" />
+    <Compile Include="Network\GameServer\Handlers\2227 - MsgSynAdversitingOpt.cs" />
+    <Compile Include="Network\GameServer\Handlers\2320 - MsgSubPro.cs" />
+    <Compile Include="Network\GameServer\Handlers\General Data.cs" />
+    <Compile Include="Network\Login Client.cs" />
+    <Compile Include="Network\LoginServer\Login Packet Handler.cs" />
+    <Compile Include="Network\LoginServer\Login Socket.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server Kernel.cs" />
+    <Compile Include="Server Strings.cs" />
+    <Compile Include="Structures\Actions\Automatic Events.cs" />
+    <Compile Include="Structures\Actions\Game Action.cs" />
+    <Compile Include="Structures\Battle System.cs" />
+    <Compile Include="Structures\Captcha Box.cs" />
+    <Compile Include="Structures\Carry.cs" />
+    <Compile Include="Structures\Detained Object.cs" />
+    <Compile Include="Structures\Entities\Character.cs" />
+    <Compile Include="Structures\Entities\Dynamic Npc.cs" />
+    <Compile Include="Structures\Entities\Event Flag.cs" />
+    <Compile Include="Structures\Entities\Game Npc.cs" />
+    <Compile Include="Structures\Entities\Monster.cs" />
+    <Compile Include="Structures\Entity Status.cs" />
+    <Compile Include="Structures\Events\Capture the Flag.cs" />
+    <Compile Include="Structures\Events\Elite PK Tournament.cs" />
+    <Compile Include="Structures\Events\Family War.cs" />
+    <Compile Include="Structures\Events\Flower Ranking.cs" />
+    <Compile Include="Structures\Events\Guild Contest.cs" />
+    <Compile Include="Structures\Events\Line Skill PK Tournament.cs" />
+    <Compile Include="Structures\Events\Quiz Show.cs" />
+    <Compile Include="Structures\Events\Score PK Event.cs" />
+    <Compile Include="Structures\Events\Syndicate Score War.cs" />
+    <Compile Include="Structures\Flower Object.cs" />
+    <Compile Include="Structures\Guide.cs" />
+    <Compile Include="Structures\Interfaces\IActionStruct.cs" />
+    <Compile Include="Structures\Interfaces\IArtifact.cs" />
+    <Compile Include="Structures\Interfaces\IHonorReward.cs" />
+    <Compile Include="Structures\Interfaces\IKoCount.cs" />
+    <Compile Include="Structures\Interfaces\INextAction.cs" />
+    <Compile Include="Structures\Interfaces\INpc.cs" />
+    <Compile Include="Structures\Interfaces\IOnTimer.cs" />
+    <Compile Include="Structures\Interfaces\IPassway.cs" />
+    <Compile Include="Structures\Interfaces\IQualifierRank.cs" />
+    <Compile Include="Structures\Interfaces\IQuenchDrop.cs" />
+    <Compile Include="Structures\Interfaces\IRefinery.cs" />
+    <Compile Include="Structures\Interfaces\IRole.cs" />
+    <Compile Include="Structures\Interfaces\IScore.cs" />
+    <Compile Include="Structures\Interfaces\IScreenObject.cs" />
+    <Compile Include="Structures\Interfaces\IStatus.cs" />
+    <Compile Include="Structures\Interfaces\ISubClass.cs" />
+    <Compile Include="Structures\Interfaces\ITaskStruct.cs" />
+    <Compile Include="Structures\Interfaces\Line Skill PK Statistic.cs" />
+    <Compile Include="Structures\Items\Booth Item.cs" />
+    <Compile Include="Structures\Items\Equipment.cs" />
+    <Compile Include="Structures\Items\Inventory.cs" />
+    <Compile Include="Structures\Items\Item.cs" />
+    <Compile Include="Structures\Items\Map Item.cs" />
+    <Compile Include="Structures\Items\Warehouse.cs" />
+    <Compile Include="Structures\Login Request.cs" />
+    <Compile Include="Structures\Magic Data.cs" />
+    <Compile Include="Structures\Magic Type Operation.cs" />
+    <Compile Include="Structures\Magic.cs" />
+    <Compile Include="Structures\Nobility.cs" />
+    <Compile Include="Structures\Pet Data.cs" />
+    <Compile Include="Structures\Pigeon.cs" />
+    <Compile Include="Structures\Pk Exploit.cs" />
+    <Compile Include="Structures\Player Booth.cs" />
+    <Compile Include="Structures\Qualifier\Arena Engine.cs" />
+    <Compile Include="Structures\Qualifier\Arena Match.cs" />
+    <Compile Include="Structures\Quiz Show User Object.cs" />
+    <Compile Include="Structures\Relationship.cs" />
+    <Compile Include="Structures\Request Box.cs" />
+    <Compile Include="Structures\Society\Arsenal.cs" />
+    <Compile Include="Structures\Society\Family Member.cs" />
+    <Compile Include="Structures\Society\Family.cs" />
+    <Compile Include="Structures\Society\Syndicate Member.cs" />
+    <Compile Include="Structures\Society\Syndicate Recruitment.cs" />
+    <Compile Include="Structures\Society\Syndicate.cs" />
+    <Compile Include="Structures\Society\Totem Pole.cs" />
+    <Compile Include="Structures\Society\Totem.cs" />
+    <Compile Include="Structures\Student.cs" />
+    <Compile Include="Structures\Sub Profession.cs" />
+    <Compile Include="Structures\Syndicate Score.cs" />
+    <Compile Include="Structures\Team.cs" />
+    <Compile Include="Structures\Tournament\Tournament Matches.cs" />
+    <Compile Include="Structures\Tournament\Tournament Structure.cs" />
+    <Compile Include="Structures\Trade Partner.cs" />
+    <Compile Include="Structures\Trade.cs" />
+    <Compile Include="Structures\Transformation.cs" />
+    <Compile Include="Structures\User Score.cs" />
+    <Compile Include="Structures\Weapon Skill.cs" />
+    <Compile Include="Structures\World\Floor.cs" />
+    <Compile Include="Structures\World\Generator.cs" />
+    <Compile Include="Structures\World\Map.cs" />
+    <Compile Include="Structures\World\Screen.cs" />
+    <Compile Include="Structures\World\Tile.cs" />
+    <Compile Include="Threads\Thread Handler.cs" />
+    <Compile Include="Threads\Workers\Battle System Processing.cs" />
+    <Compile Include="Threads\Workers\Events Processing.cs" />
+    <Compile Include="Threads\Workers\Generator Processing.cs" />
+    <Compile Include="Threads\Workers\Items Processing.cs" />
+    <Compile Include="Threads\Workers\Monster AI.cs" />
+    <Compile Include="Threads\Workers\Server Processing.cs" />
+    <Compile Include="Threads\Workers\User Processing.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DB\DB.csproj">
+      <Project>{07df495f-d390-4139-913e-a5ea085ca9e3}</Project>
+      <Name>DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServerCore\ServerCore.csproj">
+      <Project>{1fed58b7-c973-4098-9710-eb6984fc4f4a}</Project>
+      <Name>ServerCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cq.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{07DF495F-D390-4139-913E-A5EA085CA9E3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DB</RootNamespace>
+    <AssemblyName>DB</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Account Table.cs" />
+    <Compile Include="Entities\ArenaQualifier.cs" />
+    <Compile Include="Entities\Broadcast Log.cs" />
+    <Compile Include="Entities\Broadcast Queue.cs" />
+    <Compile Include="Entities\Business.cs" />
+    <Compile Include="Entities\Carry.cs" />
+    <Compile Include="Entities\DbFamily.cs" />
+    <Compile Include="Entities\DbFamilyMember.cs" />
+    <Compile Include="Entities\DbFlower.cs" />
+    <Compile Include="Entities\Detained Item.cs" />
+    <Compile Include="Entities\Dynamic Map.cs" />
+    <Compile Include="Entities\Dynamic NPC.cs" />
+    <Compile Include="Entities\Dynamic Rank Records.cs" />
+    <Compile Include="Entities\Game Action.cs" />
+    <Compile Include="Entities\Game Bonus.cs" />
+    <Compile Include="Entities\Game Item Addition.cs" />
+    <Compile Include="Entities\Game Itemtype.cs" />
+    <Compile Include="Entities\Game Lottery.cs" />
+    <Compile Include="Entities\Game Magictype.cs" />
+    <Compile Include="Entities\Game Magictypeop.cs" />
+    <Compile Include="Entities\Game Map.cs" />
+    <Compile Include="Entities\Game Monstertype.cs" />
+    <Compile Include="Entities\Game Npc.cs" />
+    <Compile Include="Entities\Game Passway.cs" />
+    <Compile Include="Entities\Game Point Allot.cs" />
+    <Compile Include="Entities\Game Portal.cs" />
+    <Compile Include="Entities\Game Quiz.cs" />
+    <Compile Include="Entities\Game Rebirth.cs" />
+    <Compile Include="Entities\Game Refinery.cs" />
+    <Compile Include="Entities\Game Region.cs" />
+    <Compile Include="Entities\Game Tasks.cs" />
+    <Compile Include="Entities\Ko Board.cs" />
+    <Compile Include="Entities\Login Rcd.cs" />
+    <Compile Include="Entities\Mentor Access.cs" />
+    <Compile Include="Entities\Mentor Battle Limit.cs" />
+    <Compile Include="Entities\Mentor Contribution.cs" />
+    <Compile Include="Entities\Mentor Type.cs" />
+    <Compile Include="Entities\Mentor.cs" />
+    <Compile Include="Entities\Monster Magic.cs" />
+    <Compile Include="Entities\Name Change Log.cs" />
+    <Compile Include="Entities\Pk Reward.cs" />
+    <Compile Include="Entities\Player Character.cs" />
+    <Compile Include="Entities\Player Deleted.cs" />
+    <Compile Include="Entities\Player Enemy.cs" />
+    <Compile Include="Entities\Player Friend.cs" />
+    <Compile Include="Entities\Player Item.cs" />
+    <Compile Include="Entities\Player Levexp.cs" />
+    <Compile Include="Entities\Player Magic.cs" />
+    <Compile Include="Entities\Player Nobility Rank.cs" />
+    <Compile Include="Entities\Player PkExploit Table.cs" />
+    <Compile Include="Entities\Player Statistic.cs" />
+    <Compile Include="Entities\Player Status.cs" />
+    <Compile Include="Entities\Player Subclass.cs" />
+    <Compile Include="Entities\Player Title.cs" />
+    <Compile Include="Entities\Player Weapon Skill.cs" />
+    <Compile Include="Entities\Shop Goods.cs" />
+    <Compile Include="Entities\Spawn Generator.cs" />
+    <Compile Include="Entities\Syndicate Advertising.cs" />
+    <Compile Include="Entities\Syndicate Ally.cs" />
+    <Compile Include="Entities\Syndicate Attr.cs" />
+    <Compile Include="Entities\Syndicate Enemy.cs" />
+    <Compile Include="Entities\Syndicate Totem.cs" />
+    <Compile Include="Entities\Syndicate.cs" />
+    <Compile Include="Hibernate Data Row.cs" />
+    <Compile Include="Mappings\Account.cs" />
+    <Compile Include="Mappings\Action.cs" />
+    <Compile Include="Mappings\ArenaQualifier.cs" />
+    <Compile Include="Mappings\Bonus.cs" />
+    <Compile Include="Mappings\Broadcast Log.cs" />
+    <Compile Include="Mappings\Broadcast Queue.cs" />
+    <Compile Include="Mappings\Business.cs" />
+    <Compile Include="Mappings\Carry.cs" />
+    <Compile Include="Mappings\Character Deleted.cs" />
+    <Compile Include="Mappings\Character.cs" />
+    <Compile Include="Mappings\Detained Item.cs" />
+    <Compile Include="Mappings\Dynamic Rank Rec Map.cs" />
+    <Compile Include="Mappings\Dynamic Map.cs" />
+    <Compile Include="Mappings\Dynamic NPC.cs" />
+    <Compile Include="Mappings\Enemy Player.cs" />
+    <Compile Include="Mappings\Family.cs" />
+    <Compile Include="Mappings\FamilyMember.cs" />
+    <Compile Include="Mappings\FlowerMap.cs" />
+    <Compile Include="Mappings\Friend Player.cs" />
+    <Compile Include="Mappings\Generator.cs" />
+    <Compile Include="Mappings\Goods.cs" />
+    <Compile Include="Mappings\Item Addition.cs" />
+    <Compile Include="Mappings\Item Player.cs" />
+    <Compile Include="Mappings\Itemtype.cs" />
+    <Compile Include="Mappings\Ko Board.cs" />
+    <Compile Include="Mappings\Levexp.cs" />
+    <Compile Include="Mappings\Login Resource.cs" />
+    <Compile Include="Mappings\Lottery Mapping.cs" />
+    <Compile Include="Mappings\Magic.cs" />
+    <Compile Include="Mappings\Magictype OP.cs" />
+    <Compile Include="Mappings\Magictype.cs" />
+    <Compile Include="Mappings\Map.cs" />
+    <Compile Include="Mappings\Mentor Access.cs" />
+    <Compile Include="Mappings\Mentor Battle Limit Mapping.cs" />
+    <Compile Include="Mappings\Mentor Contribution.cs" />
+    <Compile Include="Mappings\Mentor Type Map.cs" />
+    <Compile Include="Mappings\Mentor.cs" />
+    <Compile Include="Mappings\Monster Magic.cs" />
+    <Compile Include="Mappings\Monstertype.cs" />
+    <Compile Include="Mappings\Name Change Log.cs" />
+    <Compile Include="Mappings\Nobility Ranking.cs" />
+    <Compile Include="Mappings\Npc.cs" />
+    <Compile Include="Mappings\Passway.cs" />
+    <Compile Include="Mappings\Pk Exploit.cs" />
+    <Compile Include="Mappings\Pk Reward Mapping.cs" />
+    <Compile Include="Mappings\Point Allot.cs" />
+    <Compile Include="Mappings\Portal.cs" />
+    <Compile Include="Mappings\Quiz.cs" />
+    <Compile Include="Mappings\Rebirth.cs" />
+    <Compile Include="Mappings\Refinery.cs" />
+    <Compile Include="Mappings\Region.cs" />
+    <Compile Include="Mappings\Statistic.cs" />
+    <Compile Include="Mappings\Status.cs" />
+    <Compile Include="Mappings\Subclass.cs" />
+    <Compile Include="Mappings\Syndicate Ally.cs" />
+    <Compile Include="Mappings\Syndicate Attr.cs" />
+    <Compile Include="Mappings\Syndicate Enemy.cs" />
+    <Compile Include="Mappings\Syndicate Recruitment.cs" />
+    <Compile Include="Mappings\Syndicate Totem.cs" />
+    <Compile Include="Mappings\Syndicate.cs" />
+    <Compile Include="Mappings\Task.cs" />
+    <Compile Include="Mappings\Title.cs" />
+    <Compile Include="Mappings\Tutor.cs" />
+    <Compile Include="Mappings\Weapon Skill.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Account.cs" />
+    <Compile Include="Repositories\Action.cs" />
+    <Compile Include="Repositories\Arena Repository.cs" />
+    <Compile Include="Repositories\Bonus.cs" />
+    <Compile Include="Repositories\Broadcast Next.cs" />
+    <Compile Include="Repositories\Broadcast Past.cs" />
+    <Compile Include="Repositories\Business.cs" />
+    <Compile Include="Repositories\Carry Repository.cs" />
+    <Compile Include="Repositories\Character Deleted.cs" />
+    <Compile Include="Repositories\Character.cs" />
+    <Compile Include="Repositories\Detained Item.cs" />
+    <Compile Include="Repositories\Dynamic Map.cs" />
+    <Compile Include="Repositories\Dynamic Npc.cs" />
+    <Compile Include="Repositories\DynamicRankRecordRepo.cs" />
+    <Compile Include="Repositories\Enemy Repository.cs" />
+    <Compile Include="Repositories\FamilyMemberRepository.cs" />
+    <Compile Include="Repositories\FamilyRepository.cs" />
+    <Compile Include="Repositories\Flower.cs" />
+    <Compile Include="Repositories\Friend Repository.cs" />
+    <Compile Include="Repositories\Generator.cs" />
+    <Compile Include="Repositories\Goods.cs" />
+    <Compile Include="Repositories\Item Addition.cs" />
+    <Compile Include="Repositories\Item.cs" />
+    <Compile Include="Repositories\Itemtype Repository.cs" />
+    <Compile Include="Repositories\Itemtype.cs" />
+    <Compile Include="Repositories\Ko Board.cs" />
+    <Compile Include="Repositories\Level Experience.cs" />
+    <Compile Include="Repositories\Login Rcd Repository.cs" />
+    <Compile Include="Repositories\Lottery Repository.cs" />
+    <Compile Include="Repositories\Magic Type.cs" />
+    <Compile Include="Repositories\Magic.cs" />
+    <Compile Include="Repositories\Magictype Op Repository.cs" />
+    <Compile Include="Repositories\Map.cs" />
+    <Compile Include="Repositories\Mentor Access.cs" />
+    <Compile Include="Repositories\Mentor Battle Limit.cs" />
+    <Compile Include="Repositories\Mentor Contribution.cs" />
+    <Compile Include="Repositories\Mentor Repository.cs" />
+    <Compile Include="Repositories\Mentor Type.cs" />
+    <Compile Include="Repositories\Monster Magic.cs" />
+    <Compile Include="Repositories\Monsters.cs" />
+    <Compile Include="Repositories\Name Change Log Repo.cs" />
+    <Compile Include="Repositories\Nobility Rank.cs" />
+    <Compile Include="Repositories\Npc.cs" />
+    <Compile Include="Repositories\Passway.cs" />
+    <Compile Include="Repositories\Pk Bonus Repository.cs" />
+    <Compile Include="Repositories\Pk Exploit.cs" />
+    <Compile Include="Repositories\Point Allot.cs" />
+    <Compile Include="Repositories\Portals.cs" />
+    <Compile Include="Repositories\Query Executer.cs" />
+    <Compile Include="Repositories\Quiz Show.cs" />
+    <Compile Include="Repositories\Rebirth Repository.cs" />
+    <Compile Include="Repositories\Refinery.cs" />
+    <Compile Include="Repositories\Region Repository.cs" />
+    <Compile Include="Repositories\Region.cs" />
+    <Compile Include="Repositories\Statistic Repository.cs" />
+    <Compile Include="Repositories\StatusRepository.cs" />
+    <Compile Include="Repositories\SubClass.cs" />
+    <Compile Include="Repositories\Syndicate Allies.cs" />
+    <Compile Include="Repositories\Syndicate Enemies.cs" />
+    <Compile Include="Repositories\Syndicate Members.cs" />
+    <Compile Include="Repositories\Syndicate Recruitment.cs" />
+    <Compile Include="Repositories\Syndicate Totem.cs" />
+    <Compile Include="Repositories\Syndicate.cs" />
+    <Compile Include="Repositories\Tasks.cs" />
+    <Compile Include="Repositories\Title.cs" />
+    <Compile Include="Repositories\Totem.cs" />
+    <Compile Include="Repositories\Weapon Skill.cs" />
+    <Compile Include="Session Factory.cs" />
+    <Compile Include="Table Names.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServerCore\ServerCore.csproj">
+      <Project>{1fed58b7-c973-4098-9710-eb6984fc4f4a}</Project>
+      <Name>ServerCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

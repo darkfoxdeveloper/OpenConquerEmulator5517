@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1FED58B7-C973-4098-9710-EB6984FC4F4A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServerCore</RootNamespace>
+    <AssemblyName>ServerCore</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4137.9283, Culture=neutral, PublicKeyToken=a4292a325f69b123, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\zfserver v2.5187\Login Server\bin\Debug\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\zfserver v2.5187\Login Server\bin\Debug\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\zfserver v2.5187\Login Server\bin\Debug\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Calculations.cs" />
+    <Compile Include="Common\Concurrent Random.cs" />
+    <Compile Include="Common\Enums\Close Server Code.cs" />
+    <Compile Include="Common\Enums\Control Type.cs" />
+    <Compile Include="Common\Enums\DynaRankType.cs" />
+    <Compile Include="Common\Enums\Element Type.cs" />
+    <Compile Include="Common\Enums\Elite PK Match State.cs" />
+    <Compile Include="Common\Enums\ElitePkGuiType.cs" />
+    <Compile Include="Common\Enums\ElitePkMatchType.cs" />
+    <Compile Include="Common\Enums\ElitePkRoleStatusFlag.cs" />
+    <Compile Include="Common\Enums\Vip Teleport.cs" />
+    <Compile Include="Networking\Packets\1056 - Trade.cs" />
+    <Compile Include="Common\Enums\Appearence Type.cs" />
+    <Compile Include="Common\Enums\Character Authority.cs" />
+    <Compile Include="Common\Enums\Character Information.cs" />
+    <Compile Include="Common\Enums\Chat Flags.cs" />
+    <Compile Include="Common\Enums\Chat Tone.cs" />
+    <Compile Include="Common\Enums\Detain Mode.cs" />
+    <Compile Include="Common\Enums\Dialog Type.cs" />
+    <Compile Include="Common\Enums\Entity Action.cs" />
+    <Compile Include="Common\Enums\Entity Direction.cs" />
+    <Compile Include="Common\Enums\Event State.cs" />
+    <Compile Include="Common\Enums\Family Type.cs" />
+    <Compile Include="Common\Enums\Flower Type.cs" />
+    <Compile Include="Common\Enums\Gem Type.cs" />
+    <Compile Include="Common\Enums\Identity Range.cs" />
+    <Compile Include="Common\Enums\Interaction Effect.cs" />
+    <Compile Include="Common\Enums\Interaction Type.cs" />
+    <Compile Include="Common\Enums\InterServer State.cs" />
+    <Compile Include="Common\Enums\Item Color.cs" />
+    <Compile Include="Common\Enums\Item Effect.cs" />
+    <Compile Include="Common\Enums\Item Mode.cs" />
+    <Compile Include="Common\Enums\Item Position.cs" />
+    <Compile Include="Common\Enums\Item Removal Type.cs" />
+    <Compile Include="Common\Enums\Login Player Amount.cs" />
+    <Compile Include="Common\Enums\Login Server Response.cs" />
+    <Compile Include="Common\Enums\Magic Sort.cs" />
+    <Compile Include="Common\Enums\Magic State.cs" />
+    <Compile Include="Common\Enums\Map Flags.cs" />
+    <Compile Include="Common\Enums\Mentor Contribution.cs" />
+    <Compile Include="Common\Enums\MentorRequest.cs" />
+    <Compile Include="Common\Enums\Mob Interaction Type.cs" />
+    <Compile Include="Common\Enums\Monster Attack User.cs" />
+    <Compile Include="Common\Enums\Nobility.cs" />
+    <Compile Include="Common\Enums\Npc Type.cs" />
+    <Compile Include="Common\Enums\NpcActionType.cs" />
+    <Compile Include="Common\Enums\Open Interface.cs" />
+    <Compile Include="Common\Enums\Pk Bonus Type.cs" />
+    <Compile Include="Common\Enums\Pk Modes Type.cs" />
+    <Compile Include="Common\Enums\Purification Type.cs" />
+    <Compile Include="Common\Enums\Refinery Type.cs" />
+    <Compile Include="Common\Enums\Region Type.cs" />
+    <Compile Include="Common\Enums\Rejection Type.cs" />
+    <Compile Include="Common\Enums\Relation Type.cs" />
+    <Compile Include="Common\Enums\Syndicate Profession Requirement.cs" />
+    <Compile Include="Common\Enums\Syndicate Rank.cs" />
+    <Compile Include="Common\Enums\Syndicate Request.cs" />
+    <Compile Include="Common\Enums\Task Action Type.cs" />
+    <Compile Include="Common\Enums\Team Action Type.cs" />
+    <Compile Include="Common\Enums\Title.cs" />
+    <Compile Include="Common\Enums\Top Icon Flags.cs" />
+    <Compile Include="Common\Enums\Totem Pole Type.cs" />
+    <Compile Include="Common\Enums\Totem View.cs" />
+    <Compile Include="Common\Enums\Trade Mode.cs" />
+    <Compile Include="Common\Enums\User Flags.cs" />
+    <Compile Include="Common\Ini Parser.cs" />
+    <Compile Include="Common\Item Default.cs" />
+    <Compile Include="Common\Log Writer.cs" />
+    <Compile Include="Common\Native Function Calls.cs" />
+    <Compile Include="Common\Random Long.cs" />
+    <Compile Include="Common\Random Object Dictionary.cs" />
+    <Compile Include="Common\Thread Safe Random.cs" />
+    <Compile Include="Common\Time.cs" />
+    <Compile Include="Common\Timeout.cs" />
+    <Compile Include="Common\Unix Timestamp.cs" />
+    <Compile Include="Data Structures\Red Black Tree.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Bye Decider.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Contestand Decider.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Contestant Ranking.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Contestant.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Continuation Decider.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Elimination Decider.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Elimination Node.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Elimination Tournament.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Highest Points Score.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Loser Node.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Pairing Generator State.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Pass Through Decider.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Score.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Stay Decider.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Tournament Name Table.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Tournament Pairing.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Tournament Ranking.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Tournament Round.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Tournament Score.cs" />
+    <Compile Include="Data Structures\TournamentStructure\Winner Node.cs" />
+    <Compile Include="Interfaces\IAsynchronousSocket.cs" />
+    <Compile Include="Interfaces\ICipher.cs" />
+    <Compile Include="Interfaces\IPairingsGenerator.cs" />
+    <Compile Include="Interfaces\ITournamentVisualizer.cs" />
+    <Compile Include="Interfaces\ITree.cs" />
+    <Compile Include="Networking\Packets\10005 - Entity movement.cs" />
+    <Compile Include="Networking\Packets\1001 - Character Creation.cs" />
+    <Compile Include="Networking\Packets\10010 - General Action.cs" />
+    <Compile Include="Networking\Packets\10014 - Player Spawn.cs" />
+    <Compile Include="Networking\Packets\10017 - User Update.cs" />
+    <Compile Include="Networking\Packets\1004 - Message Packet.cs" />
+    <Compile Include="Networking\Packets\1006 - Character Information.cs" />
+    <Compile Include="Networking\Packets\1008 - Item Information.cs" />
+    <Compile Include="Networking\Packets\1009 - Item.cs" />
+    <Compile Include="Networking\Packets\1015 - String Packet.cs" />
+    <Compile Include="Networking\Packets\1019 - Relation Packet.cs" />
+    <Compile Include="Networking\Packets\1022 - Interaction Packet.cs" />
+    <Compile Include="Networking\Packets\1023 - Team Action.cs" />
+    <Compile Include="Networking\Packets\1024 - Attribute Points.cs" />
+    <Compile Include="Networking\Packets\1025 - Weapon Skill.cs" />
+    <Compile Include="Networking\Packets\1026 - Team Member Packet.cs" />
+    <Compile Include="Networking\Packets\1027 - Embed Gem.cs" />
+    <Compile Include="Networking\Packets\1033 - Data Packet.cs" />
+    <Compile Include="Networking\Packets\1034 - Detain Item Info.cs" />
+    <Compile Include="Networking\Packets\1038 - Solidify.cs" />
+    <Compile Include="Networking\Packets\1040 - Player Attributes.cs" />
+    <Compile Include="Networking\Packets\1052 - Authentication Complete.cs" />
+    <Compile Include="Networking\Packets\1055 - Authentication Response.cs" />
+    <Compile Include="Networking\Packets\1058 - Syndicate Donation.cs" />
+    <Compile Include="Networking\Packets\1059 - Authentication Seed.cs" />
+    <Compile Include="Networking\Packets\1061 - MsgDutyMinContri.cs" />
+    <Compile Include="Networking\Packets\1063 - MsgSelfSynMemAwardRank.cs" />
+    <Compile Include="Networking\Packets\1066 - MsgMeteSpecial.cs" />
+    <Compile Include="Networking\Packets\1086 - Authentication Request.cs" />
+    <Compile Include="Networking\Packets\11 - Login Meeting.cs" />
+    <Compile Include="Networking\Packets\1100 - Mac Address.cs" />
+    <Compile Include="Networking\Packets\1101 - Map Item.cs" />
+    <Compile Include="Networking\Packets\1102 - Warehouse Packet.cs" />
+    <Compile Include="Networking\Packets\1103 - Send Skill.cs" />
+    <Compile Include="Networking\Packets\1104 - Flush Skill Exp.cs" />
+    <Compile Include="Networking\Packets\1105 - Use Spell.cs" />
+    <Compile Include="Networking\Packets\1106 - Syndicate Attribute.cs" />
+    <Compile Include="Networking\Packets\1107 - Syndicate Request.cs" />
+    <Compile Include="Networking\Packets\1108 - View Equipment.cs" />
+    <Compile Include="Networking\Packets\1109 - Dynamic Npc.cs" />
+    <Compile Include="Networking\Packets\1110 - Map Information.cs" />
+    <Compile Include="Networking\Packets\1126 - MsgInviteTrans.cs" />
+    <Compile Include="Networking\Packets\1128 - MsgVipUserHandle.cs" />
+    <Compile Include="Networking\Packets\1129 - Vip Functions.cs" />
+    <Compile Include="Networking\Packets\1130 - Title.cs" />
+    <Compile Include="Networking\Packets\1150 - Flower.cs" />
+    <Compile Include="Networking\Packets\1151 - Rank.cs" />
+    <Compile Include="Networking\Packets\12 - Login Authentication.cs" />
+    <Compile Include="Networking\Packets\13 - Login Response.cs" />
+    <Compile Include="Networking\Packets\1312 - Family Packet.cs" />
+    <Compile Include="Networking\Packets\1313 - Family Occupation.cs" />
+    <Compile Include="Networking\Packets\20 - Login Server Request Online Amount.cs" />
+    <Compile Include="Networking\Packets\2030 - Npc Information.cs" />
+    <Compile Include="Networking\Packets\2031 - Npc.cs" />
+    <Compile Include="Networking\Packets\2032 - Npc Reply.cs" />
+    <Compile Include="Networking\Packets\2033 - Relation Info.cs" />
+    <Compile Include="Networking\Packets\2036 - Composition.cs" />
+    <Compile Include="Networking\Packets\2046 - Trade Buddy.cs" />
+    <Compile Include="Networking\Packets\2047 - MsgTradeBuddyInfo.cs" />
+    <Compile Include="Networking\Packets\2048 - Item Lock.cs" />
+    <Compile Include="Networking\Packets\2050 - Pigeon.cs" />
+    <Compile Include="Networking\Packets\2051 - Pigeon Query.cs" />
+    <Compile Include="Networking\Packets\2064 - Peerage.cs" />
+    <Compile Include="Networking\Packets\2065 - Guide.cs" />
+    <Compile Include="Networking\Packets\2066 - Guide Information.cs" />
+    <Compile Include="Networking\Packets\2067 - Mentor Contribution.cs" />
+    <Compile Include="Networking\Packets\2068 - Quiz Show.cs" />
+    <Compile Include="Networking\Packets\2069 - Quiz Sponsor.cs" />
+    <Compile Include="Networking\Packets\2071 - MsgRelation.cs" />
+    <Compile Include="Networking\Packets\2076 - Purification.cs" />
+    <Compile Include="Networking\Packets\2077 - Purification Activate.cs" />
+    <Compile Include="Networking\Packets\2078 - User Ip Info.cs" />
+    <Compile Include="Networking\Packets\2079 - Server Status.cs" />
+    <Compile Include="Networking\Packets\2080 - Change Name.cs" />
+    <Compile Include="Networking\Packets\21 - Online Player List.cs" />
+    <Compile Include="Networking\Packets\2101 - Syndicate Donation List.cs" />
+    <Compile Include="Networking\Packets\2102 - Syndicate Member.cs" />
+    <Compile Include="Networking\Packets\2110 - MsgSuperFlag.cs" />
+    <Compile Include="Networking\Packets\2201 - Totem Pole Info.cs" />
+    <Compile Include="Networking\Packets\2202 - Items Totem info.cs" />
+    <Compile Include="Networking\Packets\2203 - Totem Pole Check.cs" />
+    <Compile Include="Networking\Packets\2205 - Arena Check.cs" />
+    <Compile Include="Networking\Packets\2206 - Arena Fight List.cs" />
+    <Compile Include="Networking\Packets\2207 - Arena Ranking.cs" />
+    <Compile Include="Networking\Packets\2208 - Arena Yesterday Winners.cs" />
+    <Compile Include="Networking\Packets\2209 - Arena Statistic.cs" />
+    <Compile Include="Networking\Packets\2210 - Arena Match Points.cs" />
+    <Compile Include="Networking\Packets\2211 - Watch Arena Qualifier.cs" />
+    <Compile Include="Networking\Packets\2219 - MsgPKEliteMatchInfo.cs" />
+    <Compile Include="Networking\Packets\2220 - MsgPkStatistic.cs" />
+    <Compile Include="Networking\Packets\2223 - MsgElitePKGameRankInfo.cs" />
+    <Compile Include="Networking\Packets\2224 - MsgWarFlag.cs" />
+    <Compile Include="Networking\Packets\2225 - MsgSynRecuitAdvertising.cs" />
+    <Compile Include="Networking\Packets\2226 - MsgSynRecruitAdvertisingList.cs" />
+    <Compile Include="Networking\Packets\2227 - MsgSynRecruitAdvertisingOpt.cs" />
+    <Compile Include="Networking\Packets\2320 - Subclass Packet.cs" />
+    <Compile Include="Networking\Packets\24 - Server Information.cs" />
+    <Compile Include="Networking\Packets\2410 - Aura.cs" />
+    <Compile Include="Networking\Packets\26 - User Login Authenticate.cs" />
+    <Compile Include="Networking\Packets\Packet Handler Attribute.cs" />
+    <Compile Include="Networking\Packets\Packet Header.cs" />
+    <Compile Include="Networking\Packets\Packet Processor.cs" />
+    <Compile Include="Networking\Packets\Packet Structure.cs" />
+    <Compile Include="Networking\Sockets\Asynchronous Client Socket.cs" />
+    <Compile Include="Networking\Sockets\Asynchronous Game Server Socket.cs" />
+    <Compile Include="Networking\Sockets\Asynchronous Server Socket.cs" />
+    <Compile Include="Networking\Sockets\Asynchronous State.cs" />
+    <Compile Include="Networking\Sockets\Passport.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Blowfish Cipher.cs" />
+    <Compile Include="Security\Diffie-Hellman Key Exchange.cs" />
+    <Compile Include="Security\Key Exchange Request.cs" />
+    <Compile Include="Security\NetDragon Authentication Cipher.cs" />
+    <Compile Include="Security\NetDragon Key Exchange.cs" />
+    <Compile Include="Security\NetDragon Password Cipher.cs" />
+    <Compile Include="Security\Phoenix Transfer Cipher.cs" />
+    <Compile Include="Security\Rivest Cipher.cs" />
+    <Compile Include="Security\Seed Generator.cs" />
+    <Compile Include="Security\Tiger Hash Algorithm.cs" />
+    <Compile Include="Security\Transfer Cipher.cs" />
+    <Compile Include="Security\Whirlpool Hashing.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
