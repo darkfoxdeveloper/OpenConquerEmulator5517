@@ -4968,7 +4968,7 @@ namespace MsgServer.Structures.Entities
         /// </summary>
         /// <param name="amount">The amount of CPs you want to increase or decrease.</param>
         /// <returns>If the CPs amount has been changed.</returns>
-        public bool ChangeEmoney(long amount)
+        public bool ChangeEmoney(long amount, bool onlyChange = false)
         {
             if (amount < 0)
             {
@@ -4980,7 +4980,13 @@ namespace MsgServer.Structures.Entities
             }
             if ((amount + Emoney) > int.MaxValue)
                 return false;
-            Emoney += (uint)amount;
+            if (onlyChange)
+            {
+                Emoney = (uint)amount;
+            } else
+            {
+                Emoney += (uint)amount;
+            }
             return true;
         }
 

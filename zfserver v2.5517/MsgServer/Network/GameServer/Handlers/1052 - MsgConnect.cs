@@ -110,8 +110,7 @@ namespace MsgServer.Network.GameServer.Handlers
                 if (pUser.Life <= 0)
                     pUser.Life = 1;
 
-                //pClient.VipLevel = pAccount.Vip;
-                pClient.VipLevel = 6;
+                pClient.VipLevel = pAccount.Vip;
                 pClient.Identity = pUser.Identity;
                 pClient.AccountIdentity = pAccount.Identity;
 

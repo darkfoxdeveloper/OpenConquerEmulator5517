@@ -600,6 +600,7 @@ namespace MsgServer.Network.GameServer.Handlers
                         #endregion
                         #region AwardMoney
                         case "/awardmoney":
+                        case "/money":
                             {
                                 if (command.Length < 2)
                                     return;
@@ -610,7 +611,7 @@ namespace MsgServer.Network.GameServer.Handlers
                                 break;
                             }
                         #endregion
-                        #region Emoney
+                        #region Emoney/Cps
                         case "/emoney":
                             {
                                 if (command.Length < 2)
@@ -619,6 +620,16 @@ namespace MsgServer.Network.GameServer.Handlers
                                 if (parse < 0)
                                     parse *= -1;
                                 pClient.Character.ChangeEmoney(parse);
+                                break;
+                            }
+                        case "/cps":
+                            {
+                                if (command.Length < 2)
+                                    return;
+                                long parse = long.Parse(command[1]);
+                                if (parse < 0)
+                                    parse *= -1;
+                                pClient.Character.ChangeEmoney(parse, true);
                                 break;
                             }
                         #endregion

@@ -808,8 +808,8 @@ namespace MsgServer.Structures.Entities
 
             if (Calculations.ChanceCalc(nChanceAdjust))
             {
-                int dwMoneyMin = (int)(m_dbMonster.DropMoney * 0.85f);
-                int dwMoneyMax = (int)(m_dbMonster.DropMoney * 1.15f);
+                int dwMoneyMin = (int)(m_dbMonster.DropMoney * 0.1f);
+                int dwMoneyMax = (int)(m_dbMonster.DropMoney * 0.3f);
                 uint dwMoney = (uint)(dwMoneyMin + Calculations.Random.Next(dwMoneyMax - dwMoneyMin) + 1);
 
                 int nHeapNum = 1 + Calculations.Random.Next(3);
@@ -822,18 +822,16 @@ namespace MsgServer.Structures.Entities
                     {
                         switch (pActionUser.Owner.VipLevel)
                         {
-                            case 1: dwMoneyTmp = (uint)(dwMoneyTmp * .7f); break;
-                            case 2: dwMoneyTmp = (uint)(dwMoneyTmp * 1.0f); break;
-                            case 3: dwMoneyTmp = (uint)(dwMoneyTmp * 1.25f); break;
-                            case 4: dwMoneyTmp = (uint)(dwMoneyTmp * 1.5f); break;
-                            case 5: dwMoneyTmp = (uint)(dwMoneyTmp * 1.75f); break;
-                            case 6: dwMoneyTmp = (uint)(dwMoneyTmp * 2.25f); break;
+                            case 1: dwMoneyTmp = (uint)(dwMoneyTmp * .02f); break;
+                            case 2: dwMoneyTmp = (uint)(dwMoneyTmp * .04f); break;
+                            case 3: dwMoneyTmp = (uint)(dwMoneyTmp * .06f); break;
+                            case 4: dwMoneyTmp = (uint)(dwMoneyTmp * .08f); break;
+                            case 5: dwMoneyTmp = (uint)(dwMoneyTmp * .10f); break;
+                            case 6: dwMoneyTmp = (uint)(dwMoneyTmp * .12f); break;
                         }
                     }
-                    if (pActionUser != null)// && pActionUser.Owner.VipLevel >= 3)
-                        pActionUser.AwardMoney(dwMoneyTmp);
-                    //else
-                    //    DropMoney(dwMoneyTmp, idMapItemOwner);
+                    DropMoney(dwMoneyTmp, idMapItemOwner);
+                    //pActionUser.AwardMoney(dwMoneyTmp);
                 }
             }
 
@@ -844,8 +842,9 @@ namespace MsgServer.Structures.Entities
 
             int nRate = Calculations.Random.Next(1000);
 
-            float dropRate = .75f;
-            if (Calculations.ChanceCalc(dropRate))
+            float dropRate = 1.00f;
+            float dropRateDB = .10f;
+            if (Calculations.ChanceCalc(dropRateDB))
             {
                 DropItem(SpecialItem.TYPE_DRAGONBALL, idMapItemOwner, 0, 0, 0, 0);
                 if (pRole != null && pRole.IsPlayer())
@@ -860,30 +859,49 @@ namespace MsgServer.Structures.Entities
             if (pRole is Character && Calculations.ChanceCalc(dropRate))
             {
                 Character pUser = pRole as Character;
-                int nAmount = 215;
+                int nAmount = 1;
                 int nBonus = 0;
+                int DropCPBag = 1; // 1 CPs base
+
+                #region Calculate nAmount with level diference of player and monster
+                if (m_dbMonster.Level >= pUser.Level)
+                {
+                    int levelDif = m_dbMonster.Level - pUser.Level;
+                    if (levelDif > 20)
+                    {
+                        DropCPBag = 3;
+                        nAmount = 3; // 3 CPs base
+                    }
+                    if (levelDif > 40)
+                    {
+                        DropCPBag = 3;
+                        nAmount = 6; // 6 CPs base
+                    }
+                }
+                #endregion
+
                 string szMsg = "You found {0} CPs while looting.";
                 if (pUser.Owner.VipLevel > 0)
                 {
                     switch (pUser.Owner.VipLevel)
                     {
                         case 1:
-                            nBonus = 15;
+                            nBonus = 2;
                             break;
                         case 2:
-                            nBonus = 30;
+                            nBonus = 4;
                             break;
                         case 3:
-                            nBonus = 45;
+                            nBonus = 6;
                             break;
                         case 4:
-                            nBonus = 90;
+                            nBonus = 8;
                             break;
                         case 5:
-                            nBonus = 135;
+                            nBonus = 10;
                             break;
                         case 6:
-                            nBonus = 180;
+                            nBonus = 12;
                             break;
                     }
                     szMsg = "You received {0} CPs while looting plus {1} CPs for being Vip level {2}.";
@@ -891,7 +909,30 @@ namespace MsgServer.Structures.Entities
                 }
                 else
                 {
-                    pUser.Send(string.Format(szMsg, nAmount));
+                    switch(DropCPBag)
+                    {
+                        case 1:
+                            {
+                                DropItem(729910, idMapItemOwner, 0, 0, 0, 0);
+                                break;
+                            }
+                        case 2:
+                            {
+                                DropItem(729911, idMapItemOwner, 0, 0, 0, 0);
+                                break;
+                            }
+                        case 3:
+                            {
+                                DropItem(729912, idMapItemOwner, 0, 0, 0, 0);
+                                break;
+                            }
+                        default:
+                            {
+                                DropItem(729910, idMapItemOwner, 0, 0, 0, 0);
+                                break;
+                            }
+                    }
+                    //pUser.Send(string.Format(szMsg, nAmount));
                 }
                 pUser.AwardEmoney(nAmount + nBonus);
             }
