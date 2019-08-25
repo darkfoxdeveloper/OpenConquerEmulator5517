@@ -5356,14 +5356,13 @@ namespace MsgServer.Structures.Actions
             } else
             {
                 //Add Lottery Effects
-                MsgName packet = new MsgName
+                var sPacket = new MsgName
                 {
-                    Identity = type,
-                    TextAmount = 1,
+                    Identity = m_pUser.InteractingNpc.Identity,
                     Action = StringAction.ROLE_EFFECT
                 };
-                packet.Append("lottery");
-                m_pUser.Send(packet);
+                sPacket.Append("lottery");
+                m_pUser.Send(sPacket);
             }
 
             if (rank < 5)
