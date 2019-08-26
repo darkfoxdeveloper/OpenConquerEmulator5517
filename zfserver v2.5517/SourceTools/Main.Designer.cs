@@ -32,9 +32,9 @@
             System.Drawing.Drawing2D.GraphicsPath graphicsPath1 = new System.Drawing.Drawing2D.GraphicsPath();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.materialPanel1 = new MaterialSkin.Controls.MaterialPanel();
-            this.listNPCs = new MaterialSkin.Controls.MaterialListView();
-            this.lblSelectNPC = new MaterialSkin.Controls.MaterialLabel();
             this.btnLoadNPCs = new MaterialSkin.Controls.MaterialFlatButton();
+            this.lblSelectNPC = new MaterialSkin.Controls.MaterialLabel();
+            this.listNPCs = new MaterialSkin.Controls.MaterialListView();
             this.materialPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,43 +55,6 @@
             this.materialPanel1.Size = new System.Drawing.Size(799, 384);
             this.materialPanel1.TabIndex = 2;
             // 
-            // listNPCs
-            // 
-            this.listNPCs.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listNPCs.Depth = 0;
-            this.listNPCs.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
-            this.listNPCs.FullRowSelect = true;
-            this.listNPCs.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listNPCs.HideSelection = false;
-            this.listNPCs.Location = new System.Drawing.Point(11, 40);
-            this.listNPCs.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.listNPCs.MouseState = MaterialSkin.MouseState.OUT;
-            this.listNPCs.Name = "listNPCs";
-            this.listNPCs.OwnerDraw = true;
-            this.listNPCs.Shadow = null;
-            this.listNPCs.ShadowShape = null;
-            this.listNPCs.Size = new System.Drawing.Size(108, 330);
-            this.listNPCs.TabIndex = 0;
-            this.listNPCs.UseCompatibleStateImageBehavior = false;
-            this.listNPCs.View = System.Windows.Forms.View.Details;
-            // 
-            // lblSelectNPC
-            // 
-            this.lblSelectNPC.AutoSize = true;
-            this.lblSelectNPC.Depth = 0;
-            this.lblSelectNPC.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblSelectNPC.FontSize = 11;
-            this.lblSelectNPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblSelectNPC.Location = new System.Drawing.Point(11, 13);
-            this.lblSelectNPC.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblSelectNPC.Name = "lblSelectNPC";
-            this.lblSelectNPC.Primary = false;
-            this.lblSelectNPC.Shadow = null;
-            this.lblSelectNPC.ShadowShape = null;
-            this.lblSelectNPC.Size = new System.Drawing.Size(97, 19);
-            this.lblSelectNPC.TabIndex = 1;
-            this.lblSelectNPC.Text = "Select a NPC";
-            // 
             // btnLoadNPCs
             // 
             this.btnLoadNPCs.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -111,6 +74,44 @@
             this.btnLoadNPCs.Size = new System.Drawing.Size(96, 28);
             this.btnLoadNPCs.TabIndex = 2;
             this.btnLoadNPCs.Text = "Load NPCs";
+            this.btnLoadNPCs.Click += new System.EventHandler(this.BtnLoadNPCs_Click);
+            // 
+            // lblSelectNPC
+            // 
+            this.lblSelectNPC.AutoSize = true;
+            this.lblSelectNPC.Depth = 0;
+            this.lblSelectNPC.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblSelectNPC.FontSize = 11;
+            this.lblSelectNPC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblSelectNPC.Location = new System.Drawing.Point(11, 13);
+            this.lblSelectNPC.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblSelectNPC.Name = "lblSelectNPC";
+            this.lblSelectNPC.Primary = false;
+            this.lblSelectNPC.Shadow = null;
+            this.lblSelectNPC.ShadowShape = null;
+            this.lblSelectNPC.Size = new System.Drawing.Size(97, 19);
+            this.lblSelectNPC.TabIndex = 1;
+            this.lblSelectNPC.Text = "Select a NPC";
+            // 
+            // listNPCs
+            // 
+            this.listNPCs.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listNPCs.Depth = 0;
+            this.listNPCs.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.listNPCs.FullRowSelect = true;
+            this.listNPCs.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listNPCs.HideSelection = false;
+            this.listNPCs.Location = new System.Drawing.Point(11, 40);
+            this.listNPCs.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.listNPCs.MouseState = MaterialSkin.MouseState.OUT;
+            this.listNPCs.Name = "listNPCs";
+            this.listNPCs.OwnerDraw = true;
+            this.listNPCs.Shadow = null;
+            this.listNPCs.ShadowShape = null;
+            this.listNPCs.Size = new System.Drawing.Size(108, 330);
+            this.listNPCs.TabIndex = 0;
+            this.listNPCs.UseCompatibleStateImageBehavior = false;
+            this.listNPCs.View = System.Windows.Forms.View.Details;
             // 
             // Main
             // 
