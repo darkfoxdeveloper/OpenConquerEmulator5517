@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using MetroFramework.Controls;
 using System.ComponentModel;
 using ServerCore.Common.Enums;
+using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace SourceTools
 {
@@ -27,7 +29,7 @@ namespace SourceTools
             //listNPCs.Items.Clear();
             if (sourceList == null)
             {
-                sourceList = Manager.GetNPCs();
+                sourceList = Manager.GetNPCs().Where(x => x.Type == 2).ToList();
             }
             BindingList<DB.Entities.DbNpc> objects = new BindingList<DB.Entities.DbNpc>();
             foreach (DB.Entities.DbNpc npc in sourceList)
@@ -58,7 +60,7 @@ namespace SourceTools
             } else if (txt.Text.Length > 3 && DateTime.Now > lastSearch.AddSeconds(SEARCH_TIMEOUT_SECONDS))
             {
                 lastSearch = DateTime.Now;
-                IList<DB.Entities.DbNpc> n = Manager.GetNPCs().Where(x => x.Name.Contains(txt.Text) || x.Id.Equals(txt.Text)).ToList();
+                IList<DB.Entities.DbNpc> n = Manager.GetNPCs().Where(x => x.Type == 2 && (x.Name.Contains(txt.Text) || x.Id.Equals(txt.Text))).ToList();
                 RefreshNPCList(n);
             }
         }
@@ -69,41 +71,105 @@ namespace SourceTools
             MetroComboBox selected = ((MetroComboBox)sender);
             Manager.GetNPCs().Where(x => x.Id == ((DB.Entities.DbNpc)selected.SelectedItem).Id).ToList();
             DB.Entities.DbGameAction action = Manager.GetActions().Where(x => x.Identity == ((DB.Entities.DbNpc)selected.SelectedItem).Task0).FirstOrDefault();
-            DB.Entities.DbGameAction Act1, Act2, Act3, Act4, Act5, Act6;
+            List<DB.Entities.DbGameAction> CurrentNPCActions = new List<DB.Entities.DbGameAction>();
             if (action != null)
             {
+                uint nAct = 0;
                 switch ((TaskActionType)action.Type)
                 {
                     case TaskActionType.ACTION_MENUTEXT:
                         {
                             lblAction.Text = action.Param;
-                            if (action.IdNext > 0)
+                            lblAction.Tag = action;
+                            var previousAct = action;
+                            while (action.IdNext != 0 && nAct <= 5)
                             {
-                                Act1 = Manager.GetActions().Where(x => x.Identity == action.IdNext).FirstOrDefault();
-                                lblAction1.Text = Act1.Param;
-                                if (Act1 != null)
+                                DB.Entities.DbGameAction actionX  = Manager.GetActions().Where(x => x.Identity == previousAct.IdNext).FirstOrDefault();
+                                previousAct = actionX;
+                                if (actionX != null && actionX.Identity != 0)
                                 {
-                                    Act2 = Manager.GetActions().Where(x => x.Identity == Act1.IdNext).FirstOrDefault();
-                                    lblAction2.Text = Act2.Param;
-                                    if (Act2 != null)
+                                    CurrentNPCActions.Add(actionX);
+                                    if ((TaskActionType)actionX.Type != TaskActionType.ACTION_MENULINK) break;
+                                    switch(nAct)
                                     {
-                                        Act3 = Manager.GetActions().Where(x => x.Identity == Act2.IdNext).FirstOrDefault();
-                                        lblAction3.Text = Act3.Param;
+                                        case 0:
+                                            {
+                                                lblAction1.Text = actionX.Param;
+                                                lblAction1.Tag = actionX;
+                                                break;
+                                            }
+                                        case 1:
+                                            {
+                                                lblAction2.Text = actionX.Param;
+                                                lblAction2.Tag = actionX;
+                                                break;
+                                            }
+                                        case 2:
+                                            {
+                                                lblAction3.Text = actionX.Param;
+                                                lblAction3.Tag = actionX;
+                                                break;
+                                            }
+                                        case 3:
+                                            {
+                                                lblAction4.Text = actionX.Param;
+                                                lblAction4.Tag = actionX;
+                                                break;
+                                            }
+                                        case 4:
+                                            {
+                                                lblAction5.Text = actionX.Param;
+                                                lblAction5.Tag = actionX;
+                                                break;
+                                            }
+                                        case 5:
+                                            {
+                                                lblAction6.Text = actionX.Param;
+                                                lblAction6.Tag = actionX;
+                                                break;
+                                            }
                                     }
                                 }
-                                // TODO Improve this method for load all actions with a for or while
+                                nAct++;
                             }
                             break;
                         }
-                    case TaskActionType.ACTION_MENULINK: break;
-                    case TaskActionType.ACTION_MENUEDIT: break;
-                    case TaskActionType.ACTION_MENUPIC: break;
-                    case TaskActionType.ACTION_MENUCREATE: break;
-                    case TaskActionType.ACTION_RAND: break;
-                    case TaskActionType.ACTION_RANDACTION: break;
-                    case TaskActionType.ACTION_CHKTIME: break;
-                    case TaskActionType.ACTION_BROCASTMSG: break;
-                    case TaskActionType.ACTION_EXECUTEQUERY: break;
+                    //case TaskActionType.ACTION_MENULINK: break;
+                    //case TaskActionType.ACTION_MENUEDIT: break;
+                    //case TaskActionType.ACTION_MENUPIC: break;
+                    //case TaskActionType.ACTION_MENUCREATE: break;
+                    //case TaskActionType.ACTION_RAND: break;
+                    //case TaskActionType.ACTION_RANDACTION: break;
+                    //case TaskActionType.ACTION_CHKTIME: break;
+                    //case TaskActionType.ACTION_BROCASTMSG: break;
+                    //case TaskActionType.ACTION_EXECUTEQUERY: break;
+                    default:
+                        {
+                            lblAction.Text = action.Param;
+                            lblAction.Tag = action;
+                            break;
+                        }
+                }
+                lblAction1.Visible = nAct > 0;
+                lblAction2.Visible = nAct > 1;
+                lblAction3.Visible = nAct > 2;
+                lblAction4.Visible = nAct > 3;
+                lblAction5.Visible = nAct > 4;
+                lblAction6.Visible = nAct > 5;
+            }
+        }
+
+        private void LblActionLink_Click(object sender, EventArgs e)
+        {
+            Label label = ((Label)sender);
+            if (label.Tag != null)
+            {
+                uint ActionIDX = Convert.ToUInt32(Regex.Match(((DB.Entities.DbGameAction)label.Tag).Param, @"\d+$").Value);
+                DB.Entities.DbGameAction actionX = Manager.GetActions().Where(x => x.Identity == ActionIDX).FirstOrDefault();
+                if (actionX != null)
+                {
+                    lblAction.Text = actionX.Param;
+                    lblAction.Tag = actionX;
                 }
             }
         }

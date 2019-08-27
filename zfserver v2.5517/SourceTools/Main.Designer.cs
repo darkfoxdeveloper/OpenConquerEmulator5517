@@ -35,12 +35,14 @@ namespace SourceTools
             this.panelNPC = new MetroFramework.Controls.MetroPanel();
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
             this.panelAction = new MetroFramework.Controls.MetroPanel();
-            this.lblMainDialogText = new System.Windows.Forms.Label();
-            this.lblAction = new MetroFramework.Controls.MetroLabel();
-            this.lblAction1 = new System.Windows.Forms.Label();
-            this.lblAction2 = new System.Windows.Forms.Label();
+            this.lblAction5 = new System.Windows.Forms.Label();
+            this.lblAction6 = new System.Windows.Forms.Label();
             this.lblAction3 = new System.Windows.Forms.Label();
             this.lblAction4 = new System.Windows.Forms.Label();
+            this.lblAction2 = new System.Windows.Forms.Label();
+            this.lblAction1 = new System.Windows.Forms.Label();
+            this.lblMainDialogText = new System.Windows.Forms.Label();
+            this.lblAction = new MetroFramework.Controls.MetroLabel();
             this.panelNPC.SuspendLayout();
             this.panelAction.SuspendLayout();
             this.SuspendLayout();
@@ -120,8 +122,10 @@ namespace SourceTools
             // panelAction
             // 
             this.panelAction.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelAction.Controls.Add(this.lblAction4);
+            this.panelAction.Controls.Add(this.lblAction5);
+            this.panelAction.Controls.Add(this.lblAction6);
             this.panelAction.Controls.Add(this.lblAction3);
+            this.panelAction.Controls.Add(this.lblAction4);
             this.panelAction.Controls.Add(this.lblAction2);
             this.panelAction.Controls.Add(this.lblAction1);
             this.panelAction.Controls.Add(this.lblMainDialogText);
@@ -131,11 +135,77 @@ namespace SourceTools
             this.panelAction.HorizontalScrollbarSize = 10;
             this.panelAction.Location = new System.Drawing.Point(13, 193);
             this.panelAction.Name = "panelAction";
-            this.panelAction.Size = new System.Drawing.Size(488, 155);
+            this.panelAction.Size = new System.Drawing.Size(488, 172);
             this.panelAction.TabIndex = 3;
             this.panelAction.VerticalScrollbarBarColor = true;
             this.panelAction.VerticalScrollbarHighlightOnWheel = false;
             this.panelAction.VerticalScrollbarSize = 10;
+            // 
+            // lblAction5
+            // 
+            this.lblAction5.AutoSize = true;
+            this.lblAction5.Location = new System.Drawing.Point(187, 144);
+            this.lblAction5.Name = "lblAction5";
+            this.lblAction5.Size = new System.Drawing.Size(53, 13);
+            this.lblAction5.TabIndex = 9;
+            this.lblAction5.Text = "Action #5";
+            this.lblAction5.Visible = false;
+            this.lblAction5.Click += new System.EventHandler(this.LblActionLink_Click);
+            // 
+            // lblAction6
+            // 
+            this.lblAction6.AutoSize = true;
+            this.lblAction6.Location = new System.Drawing.Point(367, 144);
+            this.lblAction6.Name = "lblAction6";
+            this.lblAction6.Size = new System.Drawing.Size(53, 13);
+            this.lblAction6.TabIndex = 8;
+            this.lblAction6.Text = "Action #6";
+            this.lblAction6.Visible = false;
+            this.lblAction6.Click += new System.EventHandler(this.LblActionLink_Click);
+            // 
+            // lblAction3
+            // 
+            this.lblAction3.AutoSize = true;
+            this.lblAction3.Location = new System.Drawing.Point(367, 101);
+            this.lblAction3.Name = "lblAction3";
+            this.lblAction3.Size = new System.Drawing.Size(53, 13);
+            this.lblAction3.TabIndex = 7;
+            this.lblAction3.Text = "Action #3";
+            this.lblAction3.Visible = false;
+            this.lblAction3.Click += new System.EventHandler(this.LblActionLink_Click);
+            // 
+            // lblAction4
+            // 
+            this.lblAction4.AutoSize = true;
+            this.lblAction4.Location = new System.Drawing.Point(20, 144);
+            this.lblAction4.Name = "lblAction4";
+            this.lblAction4.Size = new System.Drawing.Size(53, 13);
+            this.lblAction4.TabIndex = 6;
+            this.lblAction4.Text = "Action #4";
+            this.lblAction4.Visible = false;
+            this.lblAction4.Click += new System.EventHandler(this.LblActionLink_Click);
+            // 
+            // lblAction2
+            // 
+            this.lblAction2.AutoSize = true;
+            this.lblAction2.Location = new System.Drawing.Point(187, 101);
+            this.lblAction2.Name = "lblAction2";
+            this.lblAction2.Size = new System.Drawing.Size(53, 13);
+            this.lblAction2.TabIndex = 5;
+            this.lblAction2.Text = "Action #2";
+            this.lblAction2.Visible = false;
+            this.lblAction2.Click += new System.EventHandler(this.LblActionLink_Click);
+            // 
+            // lblAction1
+            // 
+            this.lblAction1.AutoSize = true;
+            this.lblAction1.Location = new System.Drawing.Point(20, 101);
+            this.lblAction1.Name = "lblAction1";
+            this.lblAction1.Size = new System.Drawing.Size(53, 13);
+            this.lblAction1.TabIndex = 4;
+            this.lblAction1.Text = "Action #1";
+            this.lblAction1.Visible = false;
+            this.lblAction1.Click += new System.EventHandler(this.LblActionLink_Click);
             // 
             // lblMainDialogText
             // 
@@ -154,42 +224,6 @@ namespace SourceTools
             this.lblAction.Size = new System.Drawing.Size(119, 19);
             this.lblAction.TabIndex = 2;
             this.lblAction.Text = "Configure a Action";
-            // 
-            // lblAction1
-            // 
-            this.lblAction1.AutoSize = true;
-            this.lblAction1.Location = new System.Drawing.Point(20, 101);
-            this.lblAction1.Name = "lblAction1";
-            this.lblAction1.Size = new System.Drawing.Size(53, 13);
-            this.lblAction1.TabIndex = 4;
-            this.lblAction1.Text = "Action #1";
-            // 
-            // lblAction2
-            // 
-            this.lblAction2.AutoSize = true;
-            this.lblAction2.Location = new System.Drawing.Point(114, 101);
-            this.lblAction2.Name = "lblAction2";
-            this.lblAction2.Size = new System.Drawing.Size(53, 13);
-            this.lblAction2.TabIndex = 5;
-            this.lblAction2.Text = "Action #2";
-            // 
-            // lblAction3
-            // 
-            this.lblAction3.AutoSize = true;
-            this.lblAction3.Location = new System.Drawing.Point(210, 101);
-            this.lblAction3.Name = "lblAction3";
-            this.lblAction3.Size = new System.Drawing.Size(53, 13);
-            this.lblAction3.TabIndex = 6;
-            this.lblAction3.Text = "Action #3";
-            // 
-            // lblAction4
-            // 
-            this.lblAction4.AutoSize = true;
-            this.lblAction4.Location = new System.Drawing.Point(297, 101);
-            this.lblAction4.Name = "lblAction4";
-            this.lblAction4.Size = new System.Drawing.Size(53, 13);
-            this.lblAction4.TabIndex = 7;
-            this.lblAction4.Text = "Action #4";
             // 
             // Main
             // 
@@ -218,8 +252,10 @@ namespace SourceTools
         private MetroFramework.Controls.MetroLabel lblAction;
         private Label lblMainDialogText;
         private Label lblAction1;
-        private Label lblAction4;
         private Label lblAction3;
+        private Label lblAction4;
         private Label lblAction2;
+        private Label lblAction5;
+        private Label lblAction6;
     }
 }
