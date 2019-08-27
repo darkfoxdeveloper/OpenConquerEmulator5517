@@ -8,8 +8,10 @@ namespace SourceTools
         private static SessionFactory currentSession;
         public static DB.Repositories.NpcRepository npcRepository;
         public static DB.Repositories.GameActionRepo actionRepository;
+        public static DB.Repositories.ItemtypeRepository itemtypeRepository;
         public static IList<DB.Entities.DbNpc> npcEntities;
         public static IList<DB.Entities.DbGameAction> actionEntities;
+        public static IList<DB.Entities.DbItemtype> itemtypeEntities;
 
         public static void ConnectToServer()
         {
@@ -21,6 +23,7 @@ namespace SourceTools
         {
             npcRepository = new DB.Repositories.NpcRepository();
             actionRepository = new DB.Repositories.GameActionRepo();
+            itemtypeRepository = new DB.Repositories.ItemtypeRepository();
         }
 
         public static IList<DB.Entities.DbNpc> GetNPCs(bool forceFetch = false)
@@ -33,6 +36,12 @@ namespace SourceTools
         {
             if (actionEntities == null || forceFetch) actionEntities = actionRepository.FetchAll();
             return actionEntities;
+        }
+
+        public static IList<DB.Entities.DbItemtype> GetItemtypes(bool forceFetch = false)
+        {
+            if (itemtypeEntities == null || forceFetch) itemtypeEntities = itemtypeRepository.FetchAll();
+            return itemtypeEntities;
         }
     }
 }
