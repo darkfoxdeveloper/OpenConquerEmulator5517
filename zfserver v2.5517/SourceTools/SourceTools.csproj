@@ -107,6 +107,10 @@
       <Project>{07df495f-d390-4139-913e-a5ea085ca9e3}</Project>
       <Name>DB</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServerCore\ServerCore.csproj">
+      <Project>{1fed58b7-c973-4098-9710-eb6984fc4f4a}</Project>
+      <Name>ServerCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

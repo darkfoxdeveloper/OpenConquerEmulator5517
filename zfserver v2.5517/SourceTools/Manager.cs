@@ -9,6 +9,7 @@ namespace SourceTools
         public static DB.Repositories.NpcRepository npcRepository;
         public static DB.Repositories.GameActionRepo actionRepository;
         public static IList<DB.Entities.DbNpc> npcEntities;
+        public static IList<DB.Entities.DbGameAction> actionEntities;
 
         public static void ConnectToServer()
         {
@@ -26,6 +27,12 @@ namespace SourceTools
         {
             if (npcEntities == null || forceFetch) npcEntities = npcRepository.FetchAll();
             return npcEntities;
+        }
+
+        public static IList<DB.Entities.DbGameAction> GetActions(bool forceFetch = false)
+        {
+            if (actionEntities == null || forceFetch) actionEntities = actionRepository.FetchAll();
+            return actionEntities;
         }
     }
 }

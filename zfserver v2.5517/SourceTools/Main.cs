@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using MetroFramework.Controls;
 using System.ComponentModel;
+using ServerCore.Common.Enums;
 
 namespace SourceTools
 {
@@ -66,8 +67,45 @@ namespace SourceTools
         {
             lblMainDialogText.Text = "";
             MetroComboBox selected = ((MetroComboBox)sender);
-            //System.Windows.Forms.MessageBox.Show(((DB.Entities.DbNpc)selected.SelectedItem).Id + "");
-            //Manager.GetNPCs().Where(x => x.Id.Equals("").ToList();
+            Manager.GetNPCs().Where(x => x.Id == ((DB.Entities.DbNpc)selected.SelectedItem).Id).ToList();
+            DB.Entities.DbGameAction action = Manager.GetActions().Where(x => x.Identity == ((DB.Entities.DbNpc)selected.SelectedItem).Task0).FirstOrDefault();
+            DB.Entities.DbGameAction Act1, Act2, Act3, Act4, Act5, Act6;
+            if (action != null)
+            {
+                switch ((TaskActionType)action.Type)
+                {
+                    case TaskActionType.ACTION_MENUTEXT:
+                        {
+                            lblAction.Text = action.Param;
+                            if (action.IdNext > 0)
+                            {
+                                Act1 = Manager.GetActions().Where(x => x.Identity == action.IdNext).FirstOrDefault();
+                                lblAction1.Text = Act1.Param;
+                                if (Act1 != null)
+                                {
+                                    Act2 = Manager.GetActions().Where(x => x.Identity == Act1.IdNext).FirstOrDefault();
+                                    lblAction2.Text = Act2.Param;
+                                    if (Act2 != null)
+                                    {
+                                        Act3 = Manager.GetActions().Where(x => x.Identity == Act2.IdNext).FirstOrDefault();
+                                        lblAction3.Text = Act3.Param;
+                                    }
+                                }
+                                // TODO Improve this method for load all actions with a for or while
+                            }
+                            break;
+                        }
+                    case TaskActionType.ACTION_MENULINK: break;
+                    case TaskActionType.ACTION_MENUEDIT: break;
+                    case TaskActionType.ACTION_MENUPIC: break;
+                    case TaskActionType.ACTION_MENUCREATE: break;
+                    case TaskActionType.ACTION_RAND: break;
+                    case TaskActionType.ACTION_RANDACTION: break;
+                    case TaskActionType.ACTION_CHKTIME: break;
+                    case TaskActionType.ACTION_BROCASTMSG: break;
+                    case TaskActionType.ACTION_EXECUTEQUERY: break;
+                }
+            }
         }
     }
 }
