@@ -1,6 +1,7 @@
 ﻿using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SourceTools
@@ -27,7 +28,8 @@ namespace SourceTools
 
         private void BtnLoadNPCs_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Loaded " + MyManager.GetNPCS().Count + " NPCs");
+            IList<DB.Entities.DbNpc> npcs = MyManager.npcRepository.FetchAll();
+            MessageBox.Show("Loaded " + npcs.Count + " NPCs");
         }
     }
 }
