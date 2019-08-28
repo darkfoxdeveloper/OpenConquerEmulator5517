@@ -49,9 +49,9 @@ namespace SourceTools
             this.lblItems = new MetroFramework.Controls.MetroLabel();
             this.listItems = new MetroFramework.Controls.MetroComboBox();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.lblSelectItem = new MetroFramework.Controls.MetroLabel();
-            this.DynamicInputs = new MetroFramework.Controls.MetroLabel();
             this.btnSave = new MetroFramework.Controls.MetroButton();
+            this.DynamicInputs = new MetroFramework.Controls.MetroLabel();
+            this.lblSelectItem = new MetroFramework.Controls.MetroLabel();
             this.panelNPC.SuspendLayout();
             this.panelAction.SuspendLayout();
             this.metroPanel1.SuspendLayout();
@@ -146,7 +146,7 @@ namespace SourceTools
             this.panelAction.HorizontalScrollbarSize = 10;
             this.panelAction.Location = new System.Drawing.Point(13, 193);
             this.panelAction.Name = "panelAction";
-            this.panelAction.Size = new System.Drawing.Size(456, 199);
+            this.panelAction.Size = new System.Drawing.Size(456, 211);
             this.panelAction.TabIndex = 3;
             this.panelAction.VerticalScrollbarBarColor = true;
             this.panelAction.VerticalScrollbarHighlightOnWheel = false;
@@ -334,56 +334,58 @@ namespace SourceTools
             // 
             // metroPanel2
             // 
+            this.metroPanel2.AutoScroll = true;
             this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroPanel2.Controls.Add(this.btnSave);
             this.metroPanel2.Controls.Add(this.DynamicInputs);
-            this.metroPanel2.Controls.Add(this.lblSelectItem);
             this.metroPanel2.HorizontalScrollbarBarColor = true;
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel2.HorizontalScrollbarSize = 10;
             this.metroPanel2.Location = new System.Drawing.Point(475, 63);
             this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(489, 706);
+            this.metroPanel2.Size = new System.Drawing.Size(516, 341);
             this.metroPanel2.TabIndex = 5;
+            this.metroPanel2.VerticalScrollbar = true;
             this.metroPanel2.VerticalScrollbarBarColor = true;
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
-            // lblSelectItem
+            // btnSave
             // 
-            this.lblSelectItem.AutoSize = true;
-            this.lblSelectItem.Location = new System.Drawing.Point(30, 10);
-            this.lblSelectItem.Name = "lblSelectItem";
-            this.lblSelectItem.Size = new System.Drawing.Size(246, 19);
-            this.lblSelectItem.TabIndex = 11;
-            this.lblSelectItem.Text = "Change a Item Atributes. Select any Item";
+            this.btnSave.Location = new System.Drawing.Point(936, 34);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(55, 23);
+            this.btnSave.TabIndex = 13;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseSelectable = true;
             // 
             // DynamicInputs
             // 
             this.DynamicInputs.AutoSize = true;
-            this.DynamicInputs.Location = new System.Drawing.Point(30, 57);
+            this.DynamicInputs.Location = new System.Drawing.Point(23, 9);
             this.DynamicInputs.Name = "DynamicInputs";
             this.DynamicInputs.Size = new System.Drawing.Size(15, 19);
             this.DynamicInputs.TabIndex = 12;
             this.DynamicInputs.Text = "-";
             this.DynamicInputs.Visible = false;
             // 
-            // btnSave
+            // lblSelectItem
             // 
-            this.btnSave.Location = new System.Drawing.Point(398, 669);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 13;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseSelectable = true;
+            this.lblSelectItem.AutoSize = true;
+            this.lblSelectItem.Location = new System.Drawing.Point(667, 34);
+            this.lblSelectItem.Name = "lblSelectItem";
+            this.lblSelectItem.Size = new System.Drawing.Size(246, 19);
+            this.lblSelectItem.TabIndex = 11;
+            this.lblSelectItem.Text = "Change a Item Atributes. Select any Item";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(972, 779);
+            this.ClientSize = new System.Drawing.Size(997, 412);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroPanel1);
+            this.Controls.Add(this.lblSelectItem);
             this.Controls.Add(this.panelAction);
             this.Controls.Add(this.panelNPC);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -401,6 +403,7 @@ namespace SourceTools
             this.metroPanel2.ResumeLayout(false);
             this.metroPanel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

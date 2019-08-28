@@ -195,72 +195,72 @@ namespace SourceTools
 
         private void Main_Load(object sender, EventArgs e)
         {
-            //var propierties = typeof(DB.Entities.DbItemtype).GetProperties();
-            //var x = 0;
-            //var y = 0;
-            //var n = 0;
-            //foreach (var prop in propierties)
-            //{
-            //    var inp = new MetroTextBox()
-            //    {
-            //        Name = prop.Name,
-            //        Location = new Point(DynamicInputs.Location.X+x, DynamicInputs.Location.Y+y),
-            //        Width = 100,
-            //        Tag = ""
-            //    };
-            //    inp.GotFocus += Inp_MouseEnter;
-            //    inp.LostFocus += Inp_MouseLeave;
-            //    inputsItem.Add(inp);
-            //    metroPanel2.Controls.Add(inp);
-            //    x += inp.Width + 15;
-            //    n++;
-            //    if (n % 4 == 0)
-            //    {
-            //        y += inp.Height + 15;
-            //        x = 0;
-            //    }
-            //}
+            var propierties = typeof(DB.Entities.DbItemtype).GetProperties();
+            var x = 0;
+            var y = 0;
+            var n = 0;
+            foreach (var prop in propierties)
+            {
+                var inp = new MetroTextBox()
+                {
+                    Name = prop.Name,
+                    Location = new Point(DynamicInputs.Location.X + x, DynamicInputs.Location.Y + y),
+                    Width = 100,
+                    Tag = ""
+                };
+                inp.GotFocus += Inp_MouseEnter;
+                inp.LostFocus += Inp_MouseLeave;
+                inputsItem.Add(inp);
+                metroPanel2.Controls.Add(inp);
+                x += inp.Width + 15;
+                n++;
+                if (n % 4 == 0)
+                {
+                    y += inp.Height + 15;
+                    x = 0;
+                }
+            }
         }
 
-        //private void Inp_MouseLeave(object sender, EventArgs e)
-        //{
-        //    MetroTextBox txt = ((MetroTextBox)sender);
-        //    if (txt.Text == txt.Name)
-        //    {
-        //        txt.Clear();
-        //        txt.ForeColor = Color.Black;
-        //    }
-        //}
+        private void Inp_MouseLeave(object sender, EventArgs e)
+        {
+            MetroTextBox txt = ((MetroTextBox)sender);
+            if (txt.Text == txt.Name)
+            {
+                txt.Clear();
+                txt.ForeColor = Color.Black;
+            }
+        }
 
-        //private void Inp_MouseEnter(object sender, EventArgs e)
-        //{
-        //    MetroTextBox txt = ((MetroTextBox)sender);
-        //    if (txt.Text != txt.Name)
-        //    {
-        //        txt.Text = txt.Name;
-        //        txt.ForeColor = Color.DarkGray;
-        //    }
-        //}
+        private void Inp_MouseEnter(object sender, EventArgs e)
+        {
+            MetroTextBox txt = ((MetroTextBox)sender);
+            if (txt.Text != txt.Name)
+            {
+                txt.Text = txt.Name;
+                txt.ForeColor = Color.DarkGray;
+            }
+        }
 
         private void ListItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //DB.Entities.DbItemtype itemtype = (DB.Entities.DbItemtype)listItems.SelectedItem;
-            //foreach(MetroTextBox input in inputsItem)
-            //{
-            //    switch(input.Name)
-            //    {
-            //        case "Type":
-            //            {
-            //                input.Text = itemtype.Type + "";
-            //                break;
-            //            }
-            //        case "Name":
-            //            {
-            //                input.Text = itemtype.Name;
-            //                break;
-            //            }
-            //    }
-            //}
+            DB.Entities.DbItemtype itemtype = (DB.Entities.DbItemtype)listItems.SelectedItem;
+            foreach (MetroTextBox input in inputsItem)
+            {
+                switch (input.Name)
+                {
+                    case "Type":
+                        {
+                            input.Text = itemtype.Type + "";
+                            break;
+                        }
+                    case "Name":
+                        {
+                            input.Text = itemtype.Name;
+                            break;
+                        }
+                }
+            }
         }
 
         private void TxtSearchItems_TextChanged(object sender, EventArgs e)
