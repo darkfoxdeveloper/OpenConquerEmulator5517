@@ -35,15 +35,6 @@ namespace SourceTools
             this.lblSelectNPC = new MetroFramework.Controls.MetroLabel();
             this.panelNPC = new MetroFramework.Controls.MetroPanel();
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
-            this.panelAction = new MetroFramework.Controls.MetroPanel();
-            this.lblMainDialogText = new MetroFramework.Controls.MetroTextBox();
-            this.lblAction5 = new System.Windows.Forms.Label();
-            this.lblAction6 = new System.Windows.Forms.Label();
-            this.lblAction3 = new System.Windows.Forms.Label();
-            this.lblAction4 = new System.Windows.Forms.Label();
-            this.lblAction2 = new System.Windows.Forms.Label();
-            this.lblAction1 = new System.Windows.Forms.Label();
-            this.lblSelectAction = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.txtSearchItems = new MetroFramework.Controls.MetroTextBox();
             this.lblItems = new MetroFramework.Controls.MetroLabel();
@@ -52,10 +43,15 @@ namespace SourceTools
             this.btnSave = new MetroFramework.Controls.MetroButton();
             this.lblSelectItem = new MetroFramework.Controls.MetroLabel();
             this.panelAttributes = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelActions = new System.Windows.Forms.FlowLayoutPanel();
+            this.dynamicInputsNPC = new MetroFramework.Controls.MetroLabel();
+            this.lblSelectedNPC = new MetroFramework.Controls.MetroLabel();
+            this.btnSaveMainAction = new MetroFramework.Controls.MetroButton();
+            this.btnManageActions = new MetroFramework.Controls.MetroButton();
             this.panelNPC.SuspendLayout();
-            this.panelAction.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.panelAttributes.SuspendLayout();
+            this.panelActions.SuspendLayout();
             this.SuspendLayout();
             // 
             // listNPCs
@@ -129,136 +125,6 @@ namespace SourceTools
             this.txtSearch.TextChanged += new System.EventHandler(this.TxtSearch_TextChanged);
             this.txtSearch.Enter += new System.EventHandler(this.TxtSearch_Enter);
             this.txtSearch.Leave += new System.EventHandler(this.TxtSearch_Leave);
-            // 
-            // panelAction
-            // 
-            this.panelAction.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelAction.Controls.Add(this.lblMainDialogText);
-            this.panelAction.Controls.Add(this.lblAction5);
-            this.panelAction.Controls.Add(this.lblAction6);
-            this.panelAction.Controls.Add(this.lblAction3);
-            this.panelAction.Controls.Add(this.lblAction4);
-            this.panelAction.Controls.Add(this.lblAction2);
-            this.panelAction.Controls.Add(this.lblAction1);
-            this.panelAction.Controls.Add(this.lblSelectAction);
-            this.panelAction.HorizontalScrollbarBarColor = true;
-            this.panelAction.HorizontalScrollbarHighlightOnWheel = false;
-            this.panelAction.HorizontalScrollbarSize = 10;
-            this.panelAction.Location = new System.Drawing.Point(13, 193);
-            this.panelAction.Name = "panelAction";
-            this.panelAction.Size = new System.Drawing.Size(456, 211);
-            this.panelAction.TabIndex = 3;
-            this.panelAction.VerticalScrollbarBarColor = true;
-            this.panelAction.VerticalScrollbarHighlightOnWheel = false;
-            this.panelAction.VerticalScrollbarSize = 10;
-            // 
-            // lblMainDialogText
-            // 
-            // 
-            // 
-            // 
-            this.lblMainDialogText.CustomButton.Image = null;
-            this.lblMainDialogText.CustomButton.Location = new System.Drawing.Point(376, 2);
-            this.lblMainDialogText.CustomButton.Name = "";
-            this.lblMainDialogText.CustomButton.Size = new System.Drawing.Size(59, 59);
-            this.lblMainDialogText.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.lblMainDialogText.CustomButton.TabIndex = 1;
-            this.lblMainDialogText.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.lblMainDialogText.CustomButton.UseSelectable = true;
-            this.lblMainDialogText.CustomButton.Visible = false;
-            this.lblMainDialogText.Lines = new string[] {
-        "lblMainDialogText"};
-            this.lblMainDialogText.Location = new System.Drawing.Point(9, 51);
-            this.lblMainDialogText.MaxLength = 32767;
-            this.lblMainDialogText.Multiline = true;
-            this.lblMainDialogText.Name = "lblMainDialogText";
-            this.lblMainDialogText.PasswordChar = '\0';
-            this.lblMainDialogText.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.lblMainDialogText.SelectedText = "";
-            this.lblMainDialogText.SelectionLength = 0;
-            this.lblMainDialogText.SelectionStart = 0;
-            this.lblMainDialogText.ShortcutsEnabled = true;
-            this.lblMainDialogText.Size = new System.Drawing.Size(438, 64);
-            this.lblMainDialogText.TabIndex = 10;
-            this.lblMainDialogText.Text = "lblMainDialogText";
-            this.lblMainDialogText.UseSelectable = true;
-            this.lblMainDialogText.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.lblMainDialogText.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // lblAction5
-            // 
-            this.lblAction5.AutoSize = true;
-            this.lblAction5.Location = new System.Drawing.Point(187, 172);
-            this.lblAction5.Name = "lblAction5";
-            this.lblAction5.Size = new System.Drawing.Size(53, 13);
-            this.lblAction5.TabIndex = 9;
-            this.lblAction5.Text = "Action #5";
-            this.lblAction5.Visible = false;
-            this.lblAction5.Click += new System.EventHandler(this.LblActionLink_Click);
-            // 
-            // lblAction6
-            // 
-            this.lblAction6.AutoSize = true;
-            this.lblAction6.Location = new System.Drawing.Point(367, 172);
-            this.lblAction6.Name = "lblAction6";
-            this.lblAction6.Size = new System.Drawing.Size(53, 13);
-            this.lblAction6.TabIndex = 8;
-            this.lblAction6.Text = "Action #6";
-            this.lblAction6.Visible = false;
-            this.lblAction6.Click += new System.EventHandler(this.LblActionLink_Click);
-            // 
-            // lblAction3
-            // 
-            this.lblAction3.AutoSize = true;
-            this.lblAction3.Location = new System.Drawing.Point(367, 129);
-            this.lblAction3.Name = "lblAction3";
-            this.lblAction3.Size = new System.Drawing.Size(53, 13);
-            this.lblAction3.TabIndex = 7;
-            this.lblAction3.Text = "Action #3";
-            this.lblAction3.Visible = false;
-            this.lblAction3.Click += new System.EventHandler(this.LblActionLink_Click);
-            // 
-            // lblAction4
-            // 
-            this.lblAction4.AutoSize = true;
-            this.lblAction4.Location = new System.Drawing.Point(20, 172);
-            this.lblAction4.Name = "lblAction4";
-            this.lblAction4.Size = new System.Drawing.Size(53, 13);
-            this.lblAction4.TabIndex = 6;
-            this.lblAction4.Text = "Action #4";
-            this.lblAction4.Visible = false;
-            this.lblAction4.Click += new System.EventHandler(this.LblActionLink_Click);
-            // 
-            // lblAction2
-            // 
-            this.lblAction2.AutoSize = true;
-            this.lblAction2.Location = new System.Drawing.Point(187, 129);
-            this.lblAction2.Name = "lblAction2";
-            this.lblAction2.Size = new System.Drawing.Size(53, 13);
-            this.lblAction2.TabIndex = 5;
-            this.lblAction2.Text = "Action #2";
-            this.lblAction2.Visible = false;
-            this.lblAction2.Click += new System.EventHandler(this.LblActionLink_Click);
-            // 
-            // lblAction1
-            // 
-            this.lblAction1.AutoSize = true;
-            this.lblAction1.Location = new System.Drawing.Point(20, 129);
-            this.lblAction1.Name = "lblAction1";
-            this.lblAction1.Size = new System.Drawing.Size(53, 13);
-            this.lblAction1.TabIndex = 4;
-            this.lblAction1.Text = "Action #1";
-            this.lblAction1.Visible = false;
-            this.lblAction1.Click += new System.EventHandler(this.LblActionLink_Click);
-            // 
-            // lblSelectAction
-            // 
-            this.lblSelectAction.AutoSize = true;
-            this.lblSelectAction.Location = new System.Drawing.Point(9, 13);
-            this.lblSelectAction.Name = "lblSelectAction";
-            this.lblSelectAction.Size = new System.Drawing.Size(215, 19);
-            this.lblSelectAction.TabIndex = 2;
-            this.lblSelectAction.Text = "Configure a Action. Select any NPC";
             // 
             // metroPanel1
             // 
@@ -344,7 +210,7 @@ namespace SourceTools
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(936, 34);
+            this.btnSave.Location = new System.Drawing.Point(977, 200);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(55, 23);
             this.btnSave.TabIndex = 13;
@@ -355,7 +221,7 @@ namespace SourceTools
             // lblSelectItem
             // 
             this.lblSelectItem.AutoSize = true;
-            this.lblSelectItem.Location = new System.Drawing.Point(667, 34);
+            this.lblSelectItem.Location = new System.Drawing.Point(645, 200);
             this.lblSelectItem.Name = "lblSelectItem";
             this.lblSelectItem.Size = new System.Drawing.Size(246, 19);
             this.lblSelectItem.TabIndex = 11;
@@ -367,22 +233,75 @@ namespace SourceTools
             this.panelAttributes.BackColor = System.Drawing.Color.Transparent;
             this.panelAttributes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelAttributes.Controls.Add(this.DynamicInputs);
-            this.panelAttributes.Location = new System.Drawing.Point(485, 63);
+            this.panelAttributes.Location = new System.Drawing.Point(526, 229);
             this.panelAttributes.Name = "panelAttributes";
             this.panelAttributes.Padding = new System.Windows.Forms.Padding(15, 10, 15, 10);
             this.panelAttributes.Size = new System.Drawing.Size(506, 341);
             this.panelAttributes.TabIndex = 13;
             // 
+            // panelActions
+            // 
+            this.panelActions.AutoScroll = true;
+            this.panelActions.BackColor = System.Drawing.Color.Transparent;
+            this.panelActions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelActions.Controls.Add(this.dynamicInputsNPC);
+            this.panelActions.Location = new System.Drawing.Point(14, 229);
+            this.panelActions.Name = "panelActions";
+            this.panelActions.Padding = new System.Windows.Forms.Padding(15, 10, 15, 10);
+            this.panelActions.Size = new System.Drawing.Size(506, 341);
+            this.panelActions.TabIndex = 14;
+            // 
+            // dynamicInputsNPC
+            // 
+            this.dynamicInputsNPC.AutoSize = true;
+            this.dynamicInputsNPC.Location = new System.Drawing.Point(18, 10);
+            this.dynamicInputsNPC.Name = "dynamicInputsNPC";
+            this.dynamicInputsNPC.Size = new System.Drawing.Size(15, 19);
+            this.dynamicInputsNPC.TabIndex = 12;
+            this.dynamicInputsNPC.Text = "-";
+            this.dynamicInputsNPC.Visible = false;
+            // 
+            // lblSelectedNPC
+            // 
+            this.lblSelectedNPC.AutoSize = true;
+            this.lblSelectedNPC.Location = new System.Drawing.Point(169, 200);
+            this.lblSelectedNPC.Name = "lblSelectedNPC";
+            this.lblSelectedNPC.Size = new System.Drawing.Size(192, 19);
+            this.lblSelectedNPC.TabIndex = 15;
+            this.lblSelectedNPC.Text = "Change a NPC. Select any NPC";
+            // 
+            // btnSaveMainAction
+            // 
+            this.btnSaveMainAction.Location = new System.Drawing.Point(465, 196);
+            this.btnSaveMainAction.Name = "btnSaveMainAction";
+            this.btnSaveMainAction.Size = new System.Drawing.Size(55, 23);
+            this.btnSaveMainAction.TabIndex = 16;
+            this.btnSaveMainAction.Text = "Save";
+            this.btnSaveMainAction.UseSelectable = true;
+            this.btnSaveMainAction.Click += new System.EventHandler(this.btnSaveMainAction_Click);
+            // 
+            // btnManageActions
+            // 
+            this.btnManageActions.Location = new System.Drawing.Point(13, 200);
+            this.btnManageActions.Name = "btnManageActions";
+            this.btnManageActions.Size = new System.Drawing.Size(95, 23);
+            this.btnManageActions.TabIndex = 17;
+            this.btnManageActions.Text = "Manage Actions";
+            this.btnManageActions.UseSelectable = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 410);
+            this.ClientSize = new System.Drawing.Size(1042, 576);
+            this.Controls.Add(this.btnManageActions);
+            this.Controls.Add(this.btnSaveMainAction);
+            this.Controls.Add(this.lblSelectedNPC);
+            this.Controls.Add(this.panelActions);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.panelAttributes);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.lblSelectItem);
-            this.Controls.Add(this.panelAction);
             this.Controls.Add(this.panelNPC);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -392,12 +311,12 @@ namespace SourceTools
             this.Load += new System.EventHandler(this.Main_Load);
             this.panelNPC.ResumeLayout(false);
             this.panelNPC.PerformLayout();
-            this.panelAction.ResumeLayout(false);
-            this.panelAction.PerformLayout();
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             this.panelAttributes.ResumeLayout(false);
             this.panelAttributes.PerformLayout();
+            this.panelActions.ResumeLayout(false);
+            this.panelActions.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -409,22 +328,18 @@ namespace SourceTools
         private MetroFramework.Controls.MetroLabel lblSelectNPC;
         private MetroFramework.Controls.MetroPanel panelNPC;
         private MetroFramework.Controls.MetroTextBox txtSearch;
-        private MetroFramework.Controls.MetroPanel panelAction;
-        private MetroFramework.Controls.MetroLabel lblSelectAction;
-        private Label lblAction1;
-        private Label lblAction3;
-        private Label lblAction4;
-        private Label lblAction2;
-        private Label lblAction5;
-        private Label lblAction6;
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private MetroFramework.Controls.MetroTextBox txtSearchItems;
         private MetroFramework.Controls.MetroLabel lblItems;
         private MetroFramework.Controls.MetroComboBox listItems;
-        private MetroFramework.Controls.MetroTextBox lblMainDialogText;
         private MetroFramework.Controls.MetroLabel lblSelectItem;
         private MetroFramework.Controls.MetroLabel DynamicInputs;
         private MetroFramework.Controls.MetroButton btnSave;
         private FlowLayoutPanel panelAttributes;
+        private FlowLayoutPanel panelActions;
+        private MetroFramework.Controls.MetroLabel dynamicInputsNPC;
+        private MetroFramework.Controls.MetroLabel lblSelectedNPC;
+        private MetroFramework.Controls.MetroButton btnSaveMainAction;
+        private MetroFramework.Controls.MetroButton btnManageActions;
     }
 }

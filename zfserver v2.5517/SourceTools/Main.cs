@@ -17,8 +17,9 @@ namespace SourceTools
         private const string SEARCH_HELP = "Search...";
         private const uint SEARCH_TIMEOUT_SECONDS = 0;
         private DateTime lastSearch = DateTime.Now;
-        private List<MetroTextBox> inputsItem = new List<MetroTextBox>();
+        //private List<MetroTextBox> inputsItem = new List<MetroTextBox>();
         private DB.Entities.DbItemtype selectedItemtype;
+        private DB.Entities.DbNpc selectedNPC;
 
         public Main()
         {
@@ -87,115 +88,110 @@ namespace SourceTools
 
         private void ListNPCs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblMainDialogText.Text = "";
             MetroComboBox selected = ((MetroComboBox)sender);
-            Manager.GetNPCs().Where(x => x.Id == ((DB.Entities.DbNpc)selected.SelectedItem).Id).ToList();
-            DB.Entities.DbGameAction action = Manager.GetActions().Where(x => x.Identity == ((DB.Entities.DbNpc)selected.SelectedItem).Task0).FirstOrDefault();
-            List<DB.Entities.DbGameAction> CurrentNPCActions = new List<DB.Entities.DbGameAction>();
-            if (action != null)
-            {
-                uint nAct = 0;
-                switch ((TaskActionType)action.Type)
-                {
-                    case TaskActionType.ACTION_MENUTEXT:
-                        {
-                            lblMainDialogText.Text = action.Param;
-                            lblMainDialogText.Tag = action;
-                            var previousAct = action;
-                            while (action.IdNext != 0 && nAct <= 5)
-                            {
-                                DB.Entities.DbGameAction actionX = Manager.GetActions().Where(x => x.Identity == previousAct.IdNext).FirstOrDefault();
-                                previousAct = actionX;
-                                if (actionX != null && actionX.Identity != 0)
-                                {
-                                    CurrentNPCActions.Add(actionX);
-                                    if ((TaskActionType)actionX.Type != TaskActionType.ACTION_MENULINK) break;
-                                    switch (nAct)
-                                    {
-                                        case 0:
-                                            {
-                                                lblAction1.Text = actionX.Param;
-                                                lblAction1.Tag = actionX;
-                                                break;
-                                            }
-                                        case 1:
-                                            {
-                                                lblAction2.Text = actionX.Param;
-                                                lblAction2.Tag = actionX;
-                                                break;
-                                            }
-                                        case 2:
-                                            {
-                                                lblAction3.Text = actionX.Param;
-                                                lblAction3.Tag = actionX;
-                                                break;
-                                            }
-                                        case 3:
-                                            {
-                                                lblAction4.Text = actionX.Param;
-                                                lblAction4.Tag = actionX;
-                                                break;
-                                            }
-                                        case 4:
-                                            {
-                                                lblAction5.Text = actionX.Param;
-                                                lblAction5.Tag = actionX;
-                                                break;
-                                            }
-                                        case 5:
-                                            {
-                                                lblAction6.Text = actionX.Param;
-                                                lblAction6.Tag = actionX;
-                                                break;
-                                            }
-                                    }
-                                }
-                                nAct++;
-                            }
-                            break;
-                        }
-                    //case TaskActionType.ACTION_MENULINK: break;
-                    //case TaskActionType.ACTION_MENUEDIT: break;
-                    //case TaskActionType.ACTION_MENUPIC: break;
-                    //case TaskActionType.ACTION_MENUCREATE: break;
-                    //case TaskActionType.ACTION_RAND: break;
-                    //case TaskActionType.ACTION_RANDACTION: break;
-                    //case TaskActionType.ACTION_CHKTIME: break;
-                    //case TaskActionType.ACTION_BROCASTMSG: break;
-                    //case TaskActionType.ACTION_EXECUTEQUERY: break;
-                    default:
-                        {
-                            lblMainDialogText.Text = action.Param;
-                            lblMainDialogText.Tag = action;
-                            break;
-                        }
-                }
-                lblAction1.Visible = nAct > 0;
-                lblAction2.Visible = nAct > 1;
-                lblAction3.Visible = nAct > 2;
-                lblAction4.Visible = nAct > 3;
-                lblAction5.Visible = nAct > 4;
-                lblAction6.Visible = nAct > 5;
-            }
-        }
 
-        private void LblActionLink_Click(object sender, EventArgs e)
-        {
-            Label label = ((Label)sender);
-            if (label.Tag != null)
+            selectedNPC = (DB.Entities.DbNpc)listNPCs.SelectedItem;
+            foreach (MetroTextBox input in panelActions.Controls.OfType<MetroTextBox>())
             {
-                uint ActionIDX = Convert.ToUInt32(Regex.Match(((DB.Entities.DbGameAction)label.Tag).Param, @"\d+$").Value);
-                DB.Entities.DbGameAction actionX = Manager.GetActions().Where(x => x.Identity == ActionIDX).FirstOrDefault();
-                if (actionX != null)
+                if (input.Enabled && input.Visible)
                 {
-                    lblMainDialogText.Text = actionX.Param;
-                    lblMainDialogText.Tag = actionX;
+                    input.Text = selectedNPC.GetType().GetProperty(input.Name).GetValue(selectedNPC).ToString();
                 }
             }
+
+            //Manager.GetNPCs().Where(x => x.Id == ((DB.Entities.DbNpc)selected.SelectedItem).Id).ToList();
+            //DB.Entities.DbGameAction action = Manager.GetActions().Where(x => x.Identity == ((DB.Entities.DbNpc)selected.SelectedItem).Task0).FirstOrDefault();
+            //List<DB.Entities.DbGameAction> CurrentNPCActions = new List<DB.Entities.DbGameAction>();
+            //if (action != null)
+            //{
+            //    uint nAct = 0;
+            //    switch ((TaskActionType)action.Type)
+            //    {
+            //        case TaskActionType.ACTION_MENUTEXT:
+            //            {
+            //                lblMainDialogText.Text = action.Param;
+            //                lblMainDialogText.Tag = action;
+            //                var previousAct = action;
+            //                while (action.IdNext != 0 && nAct <= 5)
+            //                {
+            //                    DB.Entities.DbGameAction actionX = Manager.GetActions().Where(x => x.Identity == previousAct.IdNext).FirstOrDefault();
+            //                    previousAct = actionX;
+            //                    if (actionX != null && actionX.Identity != 0)
+            //                    {
+            //                        CurrentNPCActions.Add(actionX);
+            //                        if ((TaskActionType)actionX.Type != TaskActionType.ACTION_MENULINK) break;
+            //                        switch (nAct)
+            //                        {
+            //                            case 0:
+            //                                {
+            //                                    lblAction1.Text = actionX.Param;
+            //                                    lblAction1.Tag = actionX;
+            //                                    break;
+            //                                }
+            //                            case 1:
+            //                                {
+            //                                    lblAction2.Text = actionX.Param;
+            //                                    lblAction2.Tag = actionX;
+            //                                    break;
+            //                                }
+            //                            case 2:
+            //                                {
+            //                                    lblAction3.Text = actionX.Param;
+            //                                    lblAction3.Tag = actionX;
+            //                                    break;
+            //                                }
+            //                            case 3:
+            //                                {
+            //                                    lblAction4.Text = actionX.Param;
+            //                                    lblAction4.Tag = actionX;
+            //                                    break;
+            //                                }
+            //                            case 4:
+            //                                {
+            //                                    lblAction5.Text = actionX.Param;
+            //                                    lblAction5.Tag = actionX;
+            //                                    break;
+            //                                }
+            //                            case 5:
+            //                                {
+            //                                    lblAction6.Text = actionX.Param;
+            //                                    lblAction6.Tag = actionX;
+            //                                    break;
+            //                                }
+            //                        }
+            //                    }
+            //                    nAct++;
+            //                }
+            //                break;
+            //            }
+            //        //case TaskActionType.ACTION_MENULINK: break;
+            //        //case TaskActionType.ACTION_MENUEDIT: break;
+            //        //case TaskActionType.ACTION_MENUPIC: break;
+            //        //case TaskActionType.ACTION_MENUCREATE: break;
+            //        //case TaskActionType.ACTION_RAND: break;
+            //        //case TaskActionType.ACTION_RANDACTION: break;
+            //        //case TaskActionType.ACTION_CHKTIME: break;
+            //        //case TaskActionType.ACTION_BROCASTMSG: break;
+            //        //case TaskActionType.ACTION_EXECUTEQUERY: break;
+            //        default:
+            //            {
+            //                lblMainDialogText.Text = action.Param;
+            //                lblMainDialogText.Tag = action;
+            //                break;
+            //            }
+            //    }
+            //    lblAction1.Visible = nAct > 0;
+            //    lblAction2.Visible = nAct > 1;
+            //    lblAction3.Visible = nAct > 2;
+            //    lblAction4.Visible = nAct > 3;
+            //    lblAction5.Visible = nAct > 4;
+            //    lblAction6.Visible = nAct > 5;
+            //}
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
+            #region Load All Itemtype Inputs
             var propierties = typeof(DB.Entities.DbItemtype).GetProperties();
             var n = 0;
             foreach (var prop in propierties)
@@ -205,14 +201,30 @@ namespace SourceTools
                     Name = prop.Name,
                     Location = new Point(DynamicInputs.Location.X, DynamicInputs.Location.Y),
                     Width = 145,
-                    Tag = "",
                     Padding = new Padding(15)
                 };
                 inp.TextChanged += Inp_TextChanged;
-                inputsItem.Add(inp);
                 panelAttributes.Controls.Add(inp);
                 n++;
             }
+            #endregion
+            #region Load All NPC Inputs
+            var propierties2 = typeof(DB.Entities.DbNpc).GetProperties();
+            var n2 = 0;
+            foreach (var prop in propierties2)
+            {
+                var inp = new MetroTextBox()
+                {
+                    Name = prop.Name,
+                    Location = new Point(dynamicInputsNPC.Location.X, dynamicInputsNPC.Location.Y),
+                    Width = 145,
+                    Padding = new Padding(15)
+                };
+                inp.TextChanged += InpNPC_TextChanged;
+                panelActions.Controls.Add(inp);
+                n2++;
+            }
+            #endregion
         }
 
         private void Inp_TextChanged(object sender, EventArgs e)
@@ -221,12 +233,21 @@ namespace SourceTools
             Manager.SetValueOf(selectedItemtype, txt.Name, txt.Text);
         }
 
+        private void InpNPC_TextChanged(object sender, EventArgs e)
+        {
+            MetroTextBox txt = (MetroTextBox)sender;
+            Manager.SetValueOf(selectedNPC, txt.Name, txt.Text);
+        }
+
         private void ListItems_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedItemtype = (DB.Entities.DbItemtype)listItems.SelectedItem;
-            foreach (MetroTextBox input in inputsItem)
+            foreach (MetroTextBox input in panelAttributes.Controls.OfType<MetroTextBox>())
             {
-                input.Text = selectedItemtype.GetType().GetProperty(input.Name).GetValue(selectedItemtype).ToString();
+                if (input.Enabled && input.Visible)
+                {
+                    input.Text = selectedItemtype.GetType().GetProperty(input.Name).GetValue(selectedItemtype).ToString();
+                }
             }
         }
 
@@ -248,6 +269,11 @@ namespace SourceTools
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Manager.itemtypeRepository.SaveOrUpdate(selectedItemtype);
+        }
+
+        private void btnSaveMainAction_Click(object sender, EventArgs e)
+        {
+            Manager.npcRepository.SaveOrUpdate(selectedNPC);
         }
     }
 }
