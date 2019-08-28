@@ -14,6 +14,7 @@ namespace SourceTools
         public static IList<DB.Entities.DbNpc> npcEntities;
         public static IList<DB.Entities.DbGameAction> actionEntities;
         public static IList<DB.Entities.DbItemtype> itemtypeEntities;
+        public static Main MainForm;
 
         public static void ConnectToServer()
         {
@@ -71,6 +72,7 @@ namespace SourceTools
             {
                 obj.GetType().GetProperty(prop).SetValue(obj, value);
             }
+            MainForm.SavedWarning(true);
         }
     }
 }

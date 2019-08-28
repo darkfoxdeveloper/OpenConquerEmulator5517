@@ -1,14 +1,11 @@
-﻿using MetroFramework.Forms;
+﻿using MetroFramework.Controls;
+using MetroFramework.Forms;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using MetroFramework.Controls;
 using System.ComponentModel;
-using ServerCore.Common.Enums;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
-using System.Reflection;
 using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace SourceTools
 {
@@ -20,21 +17,36 @@ namespace SourceTools
         //private List<MetroTextBox> inputsItem = new List<MetroTextBox>();
         private DB.Entities.DbItemtype selectedItemtype;
         private DB.Entities.DbNpc selectedNPC;
+        private string PreviousTitle;
 
         public Main()
         {
             InitializeComponent();
             Manager.ConnectToServer();
+            Manager.MainForm = this;
             txtSearch.Text = SEARCH_HELP;
+            txtSearchItems.Text = SEARCH_HELP;
             RefreshNPCList();
             RefreshItemsList();
+            PreviousTitle = Text;
+        }
+
+        public void SavedWarning(bool active = false)
+        {
+            if (active)
+            {
+                Text = PreviousTitle + "*";
+            } else
+            {
+                Text = PreviousTitle;
+            }
         }
 
         private void RefreshNPCList(IList<DB.Entities.DbNpc> sourceList = null)
         {
             if (sourceList == null)
             {
-                sourceList = Manager.GetNPCs().Where(x => x.Type == 2).ToList();
+                sourceList = Manager.GetNPCs().ToList();
             }
             BindingList<DB.Entities.DbNpc> objects = new BindingList<DB.Entities.DbNpc>();
             foreach (DB.Entities.DbNpc npc in sourceList)
@@ -64,21 +76,21 @@ namespace SourceTools
 
         private void TxtSearch_Enter(object sender, EventArgs e)
         {
-            if (txtSearch.Text.Length <= 0) txtSearch.Text = SEARCH_HELP;
+            MetroTextBox mtb = (MetroTextBox)sender;
+            if (mtb.Text.Length <= 0) mtb.Text = SEARCH_HELP;
         }
 
         private void TxtSearch_Leave(object sender, EventArgs e)
         {
-            if (txtSearch.Text.Equals(SEARCH_HELP)) txtSearch.Clear();
+            MetroTextBox mtb = (MetroTextBox)sender;
+            if (mtb.Text.Equals(SEARCH_HELP)) mtb.Clear();
         }
 
         private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
             MetroTextBox txt = (MetroTextBox)sender;
-            if (txt.Text.Equals(SEARCH_HELP) || txt.Text.Length == 0)
-            {
-                RefreshNPCList();
-            } else if (txt.Text.Length > 3 && DateTime.Now > lastSearch.AddSeconds(SEARCH_TIMEOUT_SECONDS))
+            if (txt.Text.Equals(SEARCH_HELP) || txt.Text.Length == 0) return;
+            if (txt.Text.Length > 3 && DateTime.Now > lastSearch.AddSeconds(SEARCH_TIMEOUT_SECONDS))
             {
                 lastSearch = DateTime.Now;
                 IList<DB.Entities.DbNpc> n = Manager.GetNPCs().Where(x => x.Type == 2 && (x.Name.Contains(txt.Text) || x.Id.Equals(txt.Text))).ToList();
@@ -204,6 +216,8 @@ namespace SourceTools
                     Padding = new Padding(15)
                 };
                 inp.TextChanged += Inp_TextChanged;
+                inp.GotFocus += InputItemtypeItem_GotFocus;
+                inp.LostFocus += InputItemtypeItem_LostFocus;
                 panelAttributes.Controls.Add(inp);
                 n++;
             }
@@ -221,10 +235,61 @@ namespace SourceTools
                     Padding = new Padding(15)
                 };
                 inp.TextChanged += InpNPC_TextChanged;
+                inp.GotFocus += InputNPC_GotFocus;
+                inp.LostFocus += InputNPC_LostFocus;
                 panelActions.Controls.Add(inp);
                 n2++;
             }
             #endregion
+            noFilterNPCSearch.Checked = true;
+            noFilterItemSearch.Checked = true;
+            txtSearch.Enabled = false;
+            txtSearchItems.Enabled = false;
+            noFilterNPCSearch.CheckedChanged += NoFilterNPCSearch_CheckedChanged;
+            noFilterItemSearch.CheckedChanged += NoFilterItemSearch_CheckedChanged;
+        }
+
+        #region Input Events
+        private void NoFilterNPCSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            MetroCheckBox control = (MetroCheckBox)sender;
+            txtSearch.Enabled = !control.Checked;
+            if (!txtSearchItems.Enabled)
+            {
+                RefreshNPCList();
+            }
+        }
+
+        private void NoFilterItemSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            MetroCheckBox control = (MetroCheckBox)sender;
+            txtSearchItems.Enabled = !control.Checked;
+            if (!txtSearchItems.Enabled)
+            {
+                RefreshItemsList();
+            }
+        }
+
+        private void InputNPC_GotFocus(object sender, EventArgs e)
+        {
+            MetroTextBox mtb = (MetroTextBox)sender;
+            lblHelperNPCs.Text = "The " + mtb.Name + " attribute";
+        }
+
+        private void InputNPC_LostFocus(object sender, EventArgs e)
+        {
+            lblHelperNPCs.Text = "Change a NPC. Select any NPC";
+        }
+
+        private void InputItemtypeItem_GotFocus(object sender, EventArgs e)
+        {
+            MetroTextBox mtb = (MetroTextBox)sender;
+            lblHelperItemtypeItems.Text = "The " + mtb.Name + " attribute";
+        }
+
+        private void InputItemtypeItem_LostFocus(object sender, EventArgs e)
+        {
+            lblHelperItemtypeItems.Text = "Change a Item attributes. Select any Item";
         }
 
         private void Inp_TextChanged(object sender, EventArgs e)
@@ -238,6 +303,7 @@ namespace SourceTools
             MetroTextBox txt = (MetroTextBox)sender;
             Manager.SetValueOf(selectedNPC, txt.Name, txt.Text);
         }
+        #endregion
 
         private void ListItems_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -254,11 +320,8 @@ namespace SourceTools
         private void TxtSearchItems_TextChanged(object sender, EventArgs e)
         {
             MetroTextBox txt = (MetroTextBox)sender;
-            if (txt.Text.Equals(SEARCH_HELP) || txt.Text.Length == 0)
-            {
-                RefreshItemsList();
-            }
-            else if (txt.Text.Length > 3 && DateTime.Now > lastSearch.AddSeconds(SEARCH_TIMEOUT_SECONDS))
+            if (txt.Text.Equals(SEARCH_HELP) || txt.Text.Length == 0) return;
+            if (txt.Text.Length > 3 && DateTime.Now > lastSearch.AddSeconds(SEARCH_TIMEOUT_SECONDS))
             {
                 lastSearch = DateTime.Now;
                 IList<DB.Entities.DbItemtype> n = Manager.GetItemtypes().Where(x => x.Name.Contains(txt.Text) || x.Ident.Equals(txt.Text)).ToList();
@@ -269,11 +332,13 @@ namespace SourceTools
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Manager.itemtypeRepository.SaveOrUpdate(selectedItemtype);
+            SavedWarning(false);
         }
 
-        private void btnSaveMainAction_Click(object sender, EventArgs e)
+        private void BtnSaveMainAction_Click(object sender, EventArgs e)
         {
             Manager.npcRepository.SaveOrUpdate(selectedNPC);
+            SavedWarning(false);
         }
     }
 }

@@ -41,13 +41,15 @@ namespace SourceTools
             this.listItems = new MetroFramework.Controls.MetroComboBox();
             this.DynamicInputs = new MetroFramework.Controls.MetroLabel();
             this.btnSave = new MetroFramework.Controls.MetroButton();
-            this.lblSelectItem = new MetroFramework.Controls.MetroLabel();
+            this.lblHelperItemtypeItems = new MetroFramework.Controls.MetroLabel();
             this.panelAttributes = new System.Windows.Forms.FlowLayoutPanel();
             this.panelActions = new System.Windows.Forms.FlowLayoutPanel();
             this.dynamicInputsNPC = new MetroFramework.Controls.MetroLabel();
-            this.lblSelectedNPC = new MetroFramework.Controls.MetroLabel();
+            this.lblHelperNPCs = new MetroFramework.Controls.MetroLabel();
             this.btnSaveMainAction = new MetroFramework.Controls.MetroButton();
             this.btnManageActions = new MetroFramework.Controls.MetroButton();
+            this.noFilterNPCSearch = new MetroFramework.Controls.MetroCheckBox();
+            this.noFilterItemSearch = new MetroFramework.Controls.MetroCheckBox();
             this.panelNPC.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.panelAttributes.SuspendLayout();
@@ -79,6 +81,7 @@ namespace SourceTools
             // panelNPC
             // 
             this.panelNPC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelNPC.Controls.Add(this.noFilterNPCSearch);
             this.panelNPC.Controls.Add(this.txtSearch);
             this.panelNPC.Controls.Add(this.lblSelectNPC);
             this.panelNPC.Controls.Add(this.listNPCs);
@@ -99,7 +102,7 @@ namespace SourceTools
             // 
             // 
             this.txtSearch.CustomButton.Image = null;
-            this.txtSearch.CustomButton.Location = new System.Drawing.Point(175, 1);
+            this.txtSearch.CustomButton.Location = new System.Drawing.Point(95, 1);
             this.txtSearch.CustomButton.Name = "";
             this.txtSearch.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtSearch.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -117,8 +120,8 @@ namespace SourceTools
             this.txtSearch.SelectionLength = 0;
             this.txtSearch.SelectionStart = 0;
             this.txtSearch.ShortcutsEnabled = true;
-            this.txtSearch.Size = new System.Drawing.Size(197, 23);
-            this.txtSearch.TabIndex = 2;
+            this.txtSearch.Size = new System.Drawing.Size(117, 23);
+            this.txtSearch.TabIndex = 0;
             this.txtSearch.UseSelectable = true;
             this.txtSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -129,6 +132,7 @@ namespace SourceTools
             // metroPanel1
             // 
             this.metroPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroPanel1.Controls.Add(this.noFilterItemSearch);
             this.metroPanel1.Controls.Add(this.txtSearchItems);
             this.metroPanel1.Controls.Add(this.lblItems);
             this.metroPanel1.Controls.Add(this.listItems);
@@ -149,7 +153,7 @@ namespace SourceTools
             // 
             // 
             this.txtSearchItems.CustomButton.Image = null;
-            this.txtSearchItems.CustomButton.Location = new System.Drawing.Point(175, 1);
+            this.txtSearchItems.CustomButton.Location = new System.Drawing.Point(95, 1);
             this.txtSearchItems.CustomButton.Name = "";
             this.txtSearchItems.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtSearchItems.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -167,8 +171,8 @@ namespace SourceTools
             this.txtSearchItems.SelectionLength = 0;
             this.txtSearchItems.SelectionStart = 0;
             this.txtSearchItems.ShortcutsEnabled = true;
-            this.txtSearchItems.Size = new System.Drawing.Size(197, 23);
-            this.txtSearchItems.TabIndex = 2;
+            this.txtSearchItems.Size = new System.Drawing.Size(117, 23);
+            this.txtSearchItems.TabIndex = 1;
             this.txtSearchItems.UseSelectable = true;
             this.txtSearchItems.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtSearchItems.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -218,14 +222,14 @@ namespace SourceTools
             this.btnSave.UseSelectable = true;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
-            // lblSelectItem
+            // lblHelperItemtypeItems
             // 
-            this.lblSelectItem.AutoSize = true;
-            this.lblSelectItem.Location = new System.Drawing.Point(645, 200);
-            this.lblSelectItem.Name = "lblSelectItem";
-            this.lblSelectItem.Size = new System.Drawing.Size(246, 19);
-            this.lblSelectItem.TabIndex = 11;
-            this.lblSelectItem.Text = "Change a Item Atributes. Select any Item";
+            this.lblHelperItemtypeItems.AutoSize = true;
+            this.lblHelperItemtypeItems.Location = new System.Drawing.Point(645, 200);
+            this.lblHelperItemtypeItems.Name = "lblHelperItemtypeItems";
+            this.lblHelperItemtypeItems.Size = new System.Drawing.Size(246, 19);
+            this.lblHelperItemtypeItems.TabIndex = 11;
+            this.lblHelperItemtypeItems.Text = "Change a Item Atributes. Select any Item";
             // 
             // panelAttributes
             // 
@@ -261,14 +265,14 @@ namespace SourceTools
             this.dynamicInputsNPC.Text = "-";
             this.dynamicInputsNPC.Visible = false;
             // 
-            // lblSelectedNPC
+            // lblHelperNPCs
             // 
-            this.lblSelectedNPC.AutoSize = true;
-            this.lblSelectedNPC.Location = new System.Drawing.Point(169, 200);
-            this.lblSelectedNPC.Name = "lblSelectedNPC";
-            this.lblSelectedNPC.Size = new System.Drawing.Size(192, 19);
-            this.lblSelectedNPC.TabIndex = 15;
-            this.lblSelectedNPC.Text = "Change a NPC. Select any NPC";
+            this.lblHelperNPCs.AutoSize = true;
+            this.lblHelperNPCs.Location = new System.Drawing.Point(169, 200);
+            this.lblHelperNPCs.Name = "lblHelperNPCs";
+            this.lblHelperNPCs.Size = new System.Drawing.Size(192, 19);
+            this.lblHelperNPCs.TabIndex = 15;
+            this.lblHelperNPCs.Text = "Change a NPC. Select any NPC";
             // 
             // btnSaveMainAction
             // 
@@ -278,7 +282,7 @@ namespace SourceTools
             this.btnSaveMainAction.TabIndex = 16;
             this.btnSaveMainAction.Text = "Save";
             this.btnSaveMainAction.UseSelectable = true;
-            this.btnSaveMainAction.Click += new System.EventHandler(this.btnSaveMainAction_Click);
+            this.btnSaveMainAction.Click += new System.EventHandler(this.BtnSaveMainAction_Click);
             // 
             // btnManageActions
             // 
@@ -289,6 +293,26 @@ namespace SourceTools
             this.btnManageActions.Text = "Manage Actions";
             this.btnManageActions.UseSelectable = true;
             // 
+            // noFilterNPCSearch
+            // 
+            this.noFilterNPCSearch.AutoSize = true;
+            this.noFilterNPCSearch.Location = new System.Drawing.Point(135, 41);
+            this.noFilterNPCSearch.Name = "noFilterNPCSearch";
+            this.noFilterNPCSearch.Size = new System.Drawing.Size(66, 15);
+            this.noFilterNPCSearch.TabIndex = 2;
+            this.noFilterNPCSearch.Text = "No filter";
+            this.noFilterNPCSearch.UseSelectable = true;
+            // 
+            // noFilterItemSearch
+            // 
+            this.noFilterItemSearch.AutoSize = true;
+            this.noFilterItemSearch.Location = new System.Drawing.Point(135, 41);
+            this.noFilterItemSearch.Name = "noFilterItemSearch";
+            this.noFilterItemSearch.Size = new System.Drawing.Size(66, 15);
+            this.noFilterItemSearch.TabIndex = 3;
+            this.noFilterItemSearch.Text = "No filter";
+            this.noFilterItemSearch.UseSelectable = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,12 +320,12 @@ namespace SourceTools
             this.ClientSize = new System.Drawing.Size(1042, 576);
             this.Controls.Add(this.btnManageActions);
             this.Controls.Add(this.btnSaveMainAction);
-            this.Controls.Add(this.lblSelectedNPC);
+            this.Controls.Add(this.lblHelperNPCs);
             this.Controls.Add(this.panelActions);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.panelAttributes);
             this.Controls.Add(this.metroPanel1);
-            this.Controls.Add(this.lblSelectItem);
+            this.Controls.Add(this.lblHelperItemtypeItems);
             this.Controls.Add(this.panelNPC);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -332,14 +356,16 @@ namespace SourceTools
         private MetroFramework.Controls.MetroTextBox txtSearchItems;
         private MetroFramework.Controls.MetroLabel lblItems;
         private MetroFramework.Controls.MetroComboBox listItems;
-        private MetroFramework.Controls.MetroLabel lblSelectItem;
+        private MetroFramework.Controls.MetroLabel lblHelperItemtypeItems;
         private MetroFramework.Controls.MetroLabel DynamicInputs;
         private MetroFramework.Controls.MetroButton btnSave;
         private FlowLayoutPanel panelAttributes;
         private FlowLayoutPanel panelActions;
         private MetroFramework.Controls.MetroLabel dynamicInputsNPC;
-        private MetroFramework.Controls.MetroLabel lblSelectedNPC;
+        private MetroFramework.Controls.MetroLabel lblHelperNPCs;
         private MetroFramework.Controls.MetroButton btnSaveMainAction;
         private MetroFramework.Controls.MetroButton btnManageActions;
+        private MetroFramework.Controls.MetroCheckBox noFilterNPCSearch;
+        private MetroFramework.Controls.MetroCheckBox noFilterItemSearch;
     }
 }
