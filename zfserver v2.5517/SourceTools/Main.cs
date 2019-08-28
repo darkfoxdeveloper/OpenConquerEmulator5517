@@ -18,6 +18,7 @@ namespace SourceTools
         private const uint SEARCH_TIMEOUT_SECONDS = 0;
         private DateTime lastSearch = DateTime.Now;
         private List<MetroTextBox> inputsItem = new List<MetroTextBox>();
+        private DB.Entities.DbItemtype selectedItemtype;
 
         public Main()
         {
@@ -196,70 +197,36 @@ namespace SourceTools
         private void Main_Load(object sender, EventArgs e)
         {
             var propierties = typeof(DB.Entities.DbItemtype).GetProperties();
-            var x = 0;
-            var y = 0;
             var n = 0;
             foreach (var prop in propierties)
             {
                 var inp = new MetroTextBox()
                 {
                     Name = prop.Name,
-                    Location = new Point(DynamicInputs.Location.X + x, DynamicInputs.Location.Y + y),
-                    Width = 100,
-                    Tag = ""
+                    Location = new Point(DynamicInputs.Location.X, DynamicInputs.Location.Y),
+                    Width = 145,
+                    Tag = "",
+                    Padding = new Padding(15)
                 };
-                inp.GotFocus += Inp_MouseEnter;
-                inp.LostFocus += Inp_MouseLeave;
+                inp.TextChanged += Inp_TextChanged;
                 inputsItem.Add(inp);
-                metroPanel2.Controls.Add(inp);
-                x += inp.Width + 15;
+                panelAttributes.Controls.Add(inp);
                 n++;
-                if (n % 4 == 0)
-                {
-                    y += inp.Height + 15;
-                    x = 0;
-                }
             }
         }
 
-        private void Inp_MouseLeave(object sender, EventArgs e)
+        private void Inp_TextChanged(object sender, EventArgs e)
         {
-            MetroTextBox txt = ((MetroTextBox)sender);
-            if (txt.Text == txt.Name)
-            {
-                txt.Clear();
-                txt.ForeColor = Color.Black;
-            }
-        }
-
-        private void Inp_MouseEnter(object sender, EventArgs e)
-        {
-            MetroTextBox txt = ((MetroTextBox)sender);
-            if (txt.Text != txt.Name)
-            {
-                txt.Text = txt.Name;
-                txt.ForeColor = Color.DarkGray;
-            }
+            MetroTextBox txt = (MetroTextBox)sender;
+            Manager.SetValueOf(selectedItemtype, txt.Name, txt.Text);
         }
 
         private void ListItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DB.Entities.DbItemtype itemtype = (DB.Entities.DbItemtype)listItems.SelectedItem;
+            selectedItemtype = (DB.Entities.DbItemtype)listItems.SelectedItem;
             foreach (MetroTextBox input in inputsItem)
             {
-                switch (input.Name)
-                {
-                    case "Type":
-                        {
-                            input.Text = itemtype.Type + "";
-                            break;
-                        }
-                    case "Name":
-                        {
-                            input.Text = itemtype.Name;
-                            break;
-                        }
-                }
+                input.Text = selectedItemtype.GetType().GetProperty(input.Name).GetValue(selectedItemtype).ToString();
             }
         }
 
@@ -276,6 +243,11 @@ namespace SourceTools
                 IList<DB.Entities.DbItemtype> n = Manager.GetItemtypes().Where(x => x.Name.Contains(txt.Text) || x.Ident.Equals(txt.Text)).ToList();
                 RefreshItemsList(n);
             }
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
+        {
+            Manager.itemtypeRepository.SaveOrUpdate(selectedItemtype);
         }
     }
 }

@@ -48,14 +48,14 @@ namespace SourceTools
             this.txtSearchItems = new MetroFramework.Controls.MetroTextBox();
             this.lblItems = new MetroFramework.Controls.MetroLabel();
             this.listItems = new MetroFramework.Controls.MetroComboBox();
-            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.btnSave = new MetroFramework.Controls.MetroButton();
             this.DynamicInputs = new MetroFramework.Controls.MetroLabel();
+            this.btnSave = new MetroFramework.Controls.MetroButton();
             this.lblSelectItem = new MetroFramework.Controls.MetroLabel();
+            this.panelAttributes = new System.Windows.Forms.FlowLayoutPanel();
             this.panelNPC.SuspendLayout();
             this.panelAction.SuspendLayout();
             this.metroPanel1.SuspendLayout();
-            this.metroPanel2.SuspendLayout();
+            this.panelAttributes.SuspendLayout();
             this.SuspendLayout();
             // 
             // listNPCs
@@ -332,22 +332,15 @@ namespace SourceTools
             this.listItems.UseSelectable = true;
             this.listItems.SelectedIndexChanged += new System.EventHandler(this.ListItems_SelectedIndexChanged);
             // 
-            // metroPanel2
+            // DynamicInputs
             // 
-            this.metroPanel2.AutoScroll = true;
-            this.metroPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroPanel2.Controls.Add(this.DynamicInputs);
-            this.metroPanel2.HorizontalScrollbarBarColor = true;
-            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(475, 63);
-            this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(516, 341);
-            this.metroPanel2.TabIndex = 5;
-            this.metroPanel2.VerticalScrollbar = true;
-            this.metroPanel2.VerticalScrollbarBarColor = true;
-            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.VerticalScrollbarSize = 10;
+            this.DynamicInputs.AutoSize = true;
+            this.DynamicInputs.Location = new System.Drawing.Point(18, 10);
+            this.DynamicInputs.Name = "DynamicInputs";
+            this.DynamicInputs.Size = new System.Drawing.Size(15, 19);
+            this.DynamicInputs.TabIndex = 12;
+            this.DynamicInputs.Text = "-";
+            this.DynamicInputs.Visible = false;
             // 
             // btnSave
             // 
@@ -357,16 +350,7 @@ namespace SourceTools
             this.btnSave.TabIndex = 13;
             this.btnSave.Text = "Save";
             this.btnSave.UseSelectable = true;
-            // 
-            // DynamicInputs
-            // 
-            this.DynamicInputs.AutoSize = true;
-            this.DynamicInputs.Location = new System.Drawing.Point(23, 9);
-            this.DynamicInputs.Name = "DynamicInputs";
-            this.DynamicInputs.Size = new System.Drawing.Size(15, 19);
-            this.DynamicInputs.TabIndex = 12;
-            this.DynamicInputs.Text = "-";
-            this.DynamicInputs.Visible = false;
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // lblSelectItem
             // 
@@ -377,13 +361,25 @@ namespace SourceTools
             this.lblSelectItem.TabIndex = 11;
             this.lblSelectItem.Text = "Change a Item Atributes. Select any Item";
             // 
+            // panelAttributes
+            // 
+            this.panelAttributes.AutoScroll = true;
+            this.panelAttributes.BackColor = System.Drawing.Color.Transparent;
+            this.panelAttributes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelAttributes.Controls.Add(this.DynamicInputs);
+            this.panelAttributes.Location = new System.Drawing.Point(485, 63);
+            this.panelAttributes.Name = "panelAttributes";
+            this.panelAttributes.Padding = new System.Windows.Forms.Padding(15, 10, 15, 10);
+            this.panelAttributes.Size = new System.Drawing.Size(506, 341);
+            this.panelAttributes.TabIndex = 13;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 412);
+            this.ClientSize = new System.Drawing.Size(997, 410);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.metroPanel2);
+            this.Controls.Add(this.panelAttributes);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.lblSelectItem);
             this.Controls.Add(this.panelAction);
@@ -400,8 +396,8 @@ namespace SourceTools
             this.panelAction.PerformLayout();
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
-            this.metroPanel2.ResumeLayout(false);
-            this.metroPanel2.PerformLayout();
+            this.panelAttributes.ResumeLayout(false);
+            this.panelAttributes.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -426,9 +422,9 @@ namespace SourceTools
         private MetroFramework.Controls.MetroLabel lblItems;
         private MetroFramework.Controls.MetroComboBox listItems;
         private MetroFramework.Controls.MetroTextBox lblMainDialogText;
-        private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Controls.MetroLabel lblSelectItem;
         private MetroFramework.Controls.MetroLabel DynamicInputs;
         private MetroFramework.Controls.MetroButton btnSave;
+        private FlowLayoutPanel panelAttributes;
     }
 }
