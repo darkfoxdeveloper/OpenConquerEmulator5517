@@ -42,7 +42,7 @@
             // 
             // 
             this.txtMainActionParam.CustomButton.Image = null;
-            this.txtMainActionParam.CustomButton.Location = new System.Drawing.Point(508, 1);
+            this.txtMainActionParam.CustomButton.Location = new System.Drawing.Point(748, 1);
             this.txtMainActionParam.CustomButton.Name = "";
             this.txtMainActionParam.CustomButton.Size = new System.Drawing.Size(107, 107);
             this.txtMainActionParam.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -66,7 +66,7 @@
             this.txtMainActionParam.SelectionStart = 0;
             this.txtMainActionParam.ShortcutsEnabled = true;
             this.txtMainActionParam.ShowButton = true;
-            this.txtMainActionParam.Size = new System.Drawing.Size(616, 109);
+            this.txtMainActionParam.Size = new System.Drawing.Size(856, 109);
             this.txtMainActionParam.TabIndex = 0;
             this.txtMainActionParam.Text = "txtMainActionParam";
             this.txtMainActionParam.UseSelectable = true;
@@ -78,7 +78,7 @@
             this.panelActions.Controls.Add(this.gridViewActions);
             this.panelActions.Location = new System.Drawing.Point(23, 212);
             this.panelActions.Name = "panelActions";
-            this.panelActions.Size = new System.Drawing.Size(616, 215);
+            this.panelActions.Size = new System.Drawing.Size(856, 293);
             this.panelActions.TabIndex = 1;
             // 
             // gridViewActions
@@ -86,14 +86,15 @@
             this.gridViewActions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridViewActions.Location = new System.Drawing.Point(3, 3);
             this.gridViewActions.Name = "gridViewActions";
-            this.gridViewActions.Size = new System.Drawing.Size(612, 212);
+            this.gridViewActions.Size = new System.Drawing.Size(853, 290);
             this.gridViewActions.TabIndex = 0;
             // 
             // ManageActions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 450);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(888, 517);
             this.Controls.Add(this.panelActions);
             this.Controls.Add(this.txtMainActionParam);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

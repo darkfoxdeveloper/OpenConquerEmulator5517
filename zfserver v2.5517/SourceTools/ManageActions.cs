@@ -46,6 +46,10 @@ namespace SourceTools
             {
                 Manager.selectedAction
             };
+            if (Manager.selectedAction.IdNextfail != 0)
+            {
+                GetChildActions(Manager.selectedAction, true);
+            }
             GetChildActions(Manager.selectedAction);
             gridViewActions.DataSource = Manager.actionChildEntities;
             #endregion
@@ -62,6 +66,17 @@ namespace SourceTools
                     if (Manager.actionChildEntities.Where(x => x.Identity == action.Identity).Count() <= 0)
                     {
                         Manager.actionChildEntities.Add(action);
+                        if (action.Type == 102)
+                        {
+                            string[] paramParameters = action.Param.Split(' ');
+                            uint.TryParse(paramParameters[paramParameters.Length - 1], out uint ParamActionID);
+                            if (ParamActionID != 0)
+                            {
+                                DbGameAction actionParam = Manager.GetActions().Where(x => x.Identity == ParamActionID).FirstOrDefault();
+                                Manager.actionChildEntities.Add(actionParam);
+                                GetChildActions(actionParam);
+                            }
+                        }
                         GetChildActions(action);
                         if (action.IdNextfail != 0)
                         {
