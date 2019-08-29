@@ -42,40 +42,34 @@ namespace SourceTools
         {
 
             #region Load All Action Childs
-            Manager.actionChildEntities = GetChildActions(Manager.selectedAction, true);
+            Manager.actionChildEntities = new BindingList<DbGameAction>
+            {
+                Manager.selectedAction
+            };
+            GetChildActions(Manager.selectedAction);
             gridViewActions.DataSource = Manager.actionChildEntities;
-            gridViewActions.Columns[0].ReadOnly = true;
             #endregion
         }
 
-        public BindingList<DbGameAction> GetChildActions(DbGameAction parentAction, bool addParent = false)
+        public void GetChildActions(DbGameAction parentAction, bool FailChilds = false)
         {
-            BindingList<DbGameAction> listChildActions = new BindingList<DbGameAction>();
-            if (addParent)
+            if (parentAction != null)
             {
-                listChildActions.Add(parentAction);
+                uint actionID = FailChilds ? parentAction.IdNextfail : parentAction.IdNext;
+                DbGameAction action = Manager.GetActions().Where(x => x.Identity == actionID).FirstOrDefault();
+                if (action != null && action.Identity != 0)
+                {
+                    if (Manager.actionChildEntities.Where(x => x.Identity == action.Identity).Count() <= 0)
+                    {
+                        Manager.actionChildEntities.Add(action);
+                        GetChildActions(action);
+                        if (action.IdNextfail != 0)
+                        {
+                            GetChildActions(action, true);
+                        }
+                    }
+                }
             }
-            DbGameAction actionX = null;
-            uint n = 0;
-            do
-            {
-                uint actionId = n == 0 ? parentAction.IdNext : actionX.IdNext;
-                DbGameAction whereAction = n == 0 ? parentAction : actionX;
-                actionX = Manager.GetActions().Where(x => (x.Identity == whereAction.IdNext) && (x.IdNext != 0)).FirstOrDefault();
-                if (actionX != null)
-                {
-                    listChildActions.Add(actionX);
-                }
-                if (whereAction.IdNextfail > 0)
-                {
-                    DbGameAction actionX2 = Manager.GetActions().Where(x => (x.Identity == whereAction.IdNextfail) && (x.Identity != 0)).FirstOrDefault();
-                    if (actionX2 != null) listChildActions.Add(actionX2);
-                    DbGameAction actionX3 = Manager.GetActions().Where(x => (x.Identity == actionX2.IdNextfail) && (x.Identity != 0)).FirstOrDefault();
-                    if (actionX3 != null) listChildActions.Add(actionX3);
-                }
-                n++;
-            } while (actionX != null && actionX.Identity != 0);
-            return listChildActions;
         }
     }
 }
