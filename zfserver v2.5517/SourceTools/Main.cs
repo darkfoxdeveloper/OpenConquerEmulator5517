@@ -14,9 +14,6 @@ namespace SourceTools
         private const string SEARCH_HELP = "Search...";
         private const uint SEARCH_TIMEOUT_SECONDS = 0;
         private DateTime lastSearch = DateTime.Now;
-        //private List<MetroTextBox> inputsItem = new List<MetroTextBox>();
-        private DB.Entities.DbItemtype selectedItemtype;
-        private DB.Entities.DbNpc selectedNPC;
         private string PreviousTitle;
 
         public Main()
@@ -102,12 +99,12 @@ namespace SourceTools
         {
             MetroComboBox selected = ((MetroComboBox)sender);
 
-            selectedNPC = (DB.Entities.DbNpc)listNPCs.SelectedItem;
+            Manager.selectedNPC = (DB.Entities.DbNpc)listNPCs.SelectedItem;
             foreach (MetroTextBox input in panelActions.Controls.OfType<MetroTextBox>())
             {
                 if (input.Enabled && input.Visible)
                 {
-                    input.Text = selectedNPC.GetType().GetProperty(input.Name).GetValue(selectedNPC).ToString();
+                    input.Text = Manager.selectedNPC.GetType().GetProperty(input.Name).GetValue(Manager.selectedNPC).ToString();
                 }
             }
 
@@ -295,24 +292,24 @@ namespace SourceTools
         private void Inp_TextChanged(object sender, EventArgs e)
         {
             MetroTextBox txt = (MetroTextBox)sender;
-            Manager.SetValueOf(selectedItemtype, txt.Name, txt.Text);
+            Manager.SetValueOf(Manager.selectedItemtype, txt.Name, txt.Text);
         }
 
         private void InpNPC_TextChanged(object sender, EventArgs e)
         {
             MetroTextBox txt = (MetroTextBox)sender;
-            Manager.SetValueOf(selectedNPC, txt.Name, txt.Text);
+            Manager.SetValueOf(Manager.selectedNPC, txt.Name, txt.Text);
         }
         #endregion
 
         private void ListItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedItemtype = (DB.Entities.DbItemtype)listItems.SelectedItem;
+            Manager.selectedItemtype = (DB.Entities.DbItemtype)listItems.SelectedItem;
             foreach (MetroTextBox input in panelAttributes.Controls.OfType<MetroTextBox>())
             {
                 if (input.Enabled && input.Visible)
                 {
-                    input.Text = selectedItemtype.GetType().GetProperty(input.Name).GetValue(selectedItemtype).ToString();
+                    input.Text = Manager.selectedItemtype.GetType().GetProperty(input.Name).GetValue(Manager.selectedItemtype).ToString();
                 }
             }
         }
@@ -331,14 +328,23 @@ namespace SourceTools
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            Manager.itemtypeRepository.SaveOrUpdate(selectedItemtype);
+            Manager.itemtypeRepository.SaveOrUpdate(Manager.selectedItemtype);
             SavedWarning(false);
         }
 
         private void BtnSaveMainAction_Click(object sender, EventArgs e)
         {
-            Manager.npcRepository.SaveOrUpdate(selectedNPC);
+            Manager.npcRepository.SaveOrUpdate(Manager.selectedNPC);
             SavedWarning(false);
+        }
+
+        private void BtnManageActions_Click(object sender, EventArgs e)
+        {
+            if (Manager.ManageActionsForm == null || Manager.ManageActionsForm.IsDisposed)
+            {
+                Manager.ManageActionsForm = new ManageActions();
+            }
+            Manager.ManageActionsForm.Show();
         }
     }
 }

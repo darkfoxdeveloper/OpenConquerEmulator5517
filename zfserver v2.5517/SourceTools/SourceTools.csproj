@@ -76,11 +76,20 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageActions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageActions.Designer.cs">
+      <DependentUpon>ManageActions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Manager.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageActions.resx">
+      <DependentUpon>ManageActions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -120,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="conquer.ico" />
+    <None Include="Resources\conquer_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

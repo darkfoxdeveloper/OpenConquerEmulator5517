@@ -7,14 +7,19 @@ namespace SourceTools
 {
     public static class Manager
     {
-        private static SessionFactory currentSession;
+        public static SessionFactory currentSession;
         public static DB.Repositories.NpcRepository npcRepository;
         public static DB.Repositories.GameActionRepo actionRepository;
         public static DB.Repositories.ItemtypeRepository itemtypeRepository;
         public static IList<DB.Entities.DbNpc> npcEntities;
         public static IList<DB.Entities.DbGameAction> actionEntities;
         public static IList<DB.Entities.DbItemtype> itemtypeEntities;
+        public static IList<DB.Entities.DbGameAction> actionChildEntities;
         public static Main MainForm;
+        public static ManageActions ManageActionsForm;
+        public static DB.Entities.DbItemtype selectedItemtype;
+        public static DB.Entities.DbNpc selectedNPC;
+        public static DB.Entities.DbGameAction selectedAction;
 
         public static void ConnectToServer()
         {

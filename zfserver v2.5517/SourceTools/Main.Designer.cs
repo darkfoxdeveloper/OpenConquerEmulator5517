@@ -34,8 +34,10 @@ namespace SourceTools
             this.listNPCs = new MetroFramework.Controls.MetroComboBox();
             this.lblSelectNPC = new MetroFramework.Controls.MetroLabel();
             this.panelNPC = new MetroFramework.Controls.MetroPanel();
+            this.noFilterNPCSearch = new MetroFramework.Controls.MetroCheckBox();
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.noFilterItemSearch = new MetroFramework.Controls.MetroCheckBox();
             this.txtSearchItems = new MetroFramework.Controls.MetroTextBox();
             this.lblItems = new MetroFramework.Controls.MetroLabel();
             this.listItems = new MetroFramework.Controls.MetroComboBox();
@@ -48,8 +50,6 @@ namespace SourceTools
             this.lblHelperNPCs = new MetroFramework.Controls.MetroLabel();
             this.btnSaveMainAction = new MetroFramework.Controls.MetroButton();
             this.btnManageActions = new MetroFramework.Controls.MetroButton();
-            this.noFilterNPCSearch = new MetroFramework.Controls.MetroCheckBox();
-            this.noFilterItemSearch = new MetroFramework.Controls.MetroCheckBox();
             this.panelNPC.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.panelAttributes.SuspendLayout();
@@ -95,6 +95,16 @@ namespace SourceTools
             this.panelNPC.VerticalScrollbarBarColor = true;
             this.panelNPC.VerticalScrollbarHighlightOnWheel = false;
             this.panelNPC.VerticalScrollbarSize = 10;
+            // 
+            // noFilterNPCSearch
+            // 
+            this.noFilterNPCSearch.AutoSize = true;
+            this.noFilterNPCSearch.Location = new System.Drawing.Point(135, 41);
+            this.noFilterNPCSearch.Name = "noFilterNPCSearch";
+            this.noFilterNPCSearch.Size = new System.Drawing.Size(66, 15);
+            this.noFilterNPCSearch.TabIndex = 2;
+            this.noFilterNPCSearch.Text = "No filter";
+            this.noFilterNPCSearch.UseSelectable = true;
             // 
             // txtSearch
             // 
@@ -146,6 +156,16 @@ namespace SourceTools
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            // 
+            // noFilterItemSearch
+            // 
+            this.noFilterItemSearch.AutoSize = true;
+            this.noFilterItemSearch.Location = new System.Drawing.Point(135, 41);
+            this.noFilterItemSearch.Name = "noFilterItemSearch";
+            this.noFilterItemSearch.Size = new System.Drawing.Size(66, 15);
+            this.noFilterItemSearch.TabIndex = 3;
+            this.noFilterItemSearch.Text = "No filter";
+            this.noFilterItemSearch.UseSelectable = true;
             // 
             // txtSearchItems
             // 
@@ -292,26 +312,7 @@ namespace SourceTools
             this.btnManageActions.TabIndex = 17;
             this.btnManageActions.Text = "Manage Actions";
             this.btnManageActions.UseSelectable = true;
-            // 
-            // noFilterNPCSearch
-            // 
-            this.noFilterNPCSearch.AutoSize = true;
-            this.noFilterNPCSearch.Location = new System.Drawing.Point(135, 41);
-            this.noFilterNPCSearch.Name = "noFilterNPCSearch";
-            this.noFilterNPCSearch.Size = new System.Drawing.Size(66, 15);
-            this.noFilterNPCSearch.TabIndex = 2;
-            this.noFilterNPCSearch.Text = "No filter";
-            this.noFilterNPCSearch.UseSelectable = true;
-            // 
-            // noFilterItemSearch
-            // 
-            this.noFilterItemSearch.AutoSize = true;
-            this.noFilterItemSearch.Location = new System.Drawing.Point(135, 41);
-            this.noFilterItemSearch.Name = "noFilterItemSearch";
-            this.noFilterItemSearch.Size = new System.Drawing.Size(66, 15);
-            this.noFilterItemSearch.TabIndex = 3;
-            this.noFilterItemSearch.Text = "No filter";
-            this.noFilterItemSearch.UseSelectable = true;
+            this.btnManageActions.Click += new System.EventHandler(this.BtnManageActions_Click);
             // 
             // Main
             // 
