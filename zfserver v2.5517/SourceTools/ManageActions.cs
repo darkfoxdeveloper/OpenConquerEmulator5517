@@ -1,8 +1,8 @@
 ﻿using DB;
 using DB.Entities;
-using MetroFramework.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace SourceTools
@@ -16,11 +16,17 @@ namespace SourceTools
 
         private void ManageActions_Load(object sender, EventArgs e)
         {
+            Text = "Manage actions of NPC: " + Manager.selectedNPC.Name;
             txtMainActionParam.CustomButton.Click += MainActionSave_Click;
-            Manager.selectedAction = Manager.GetActions().Where(x => x.Identity == Manager.selectedNPC.Task0).FirstOrDefault();
-            txtMainActionParam.Text = "NPC Selected:" + Manager.selectedAction.Identity;
-            txtMainActionParam.Enabled = Manager.selectedAction.Identity > 0;
-            LoadActions();
+            Manager.selectedAction = Manager.GetActions().Where(x => x.Identity == Manager.selectedNPC.Task0 && x.IdNext != 0).FirstOrDefault();
+            if (Manager.selectedAction != null)
+            {
+                txtMainActionParam.Text = "Main action ID: " + Manager.selectedAction.Identity;
+                LoadActions();
+            } else
+            {
+                txtMainActionParam.Text = "This NPC not have actions";
+            }
         }
 
         private void MainActionSave_Click(object sender, EventArgs e)
@@ -37,13 +43,14 @@ namespace SourceTools
 
             #region Load All Action Childs
             Manager.actionChildEntities = GetChildActions(Manager.selectedAction, true);
-            dataGridView1.DataSource = Manager.actionChildEntities;
+            gridViewActions.DataSource = Manager.actionChildEntities;
+            gridViewActions.Columns[0].ReadOnly = true;
             #endregion
         }
 
-        public List<DbGameAction> GetChildActions(DbGameAction parentAction, bool addParent = false)
+        public BindingList<DbGameAction> GetChildActions(DbGameAction parentAction, bool addParent = false)
         {
-            List<DbGameAction> listChildActions = new List<DbGameAction>();
+            BindingList<DbGameAction> listChildActions = new BindingList<DbGameAction>();
             if (addParent)
             {
                 listChildActions.Add(parentAction);
@@ -61,8 +68,10 @@ namespace SourceTools
                 }
                 if (whereAction.IdNextfail > 0)
                 {
-                    actionX = Manager.GetActions().Where(x => (x.Identity == whereAction.IdNextfail) && (x.Identity != 0)).FirstOrDefault();
-                    if (actionX != null) listChildActions.Add(actionX);
+                    DbGameAction actionX2 = Manager.GetActions().Where(x => (x.Identity == whereAction.IdNextfail) && (x.Identity != 0)).FirstOrDefault();
+                    if (actionX2 != null) listChildActions.Add(actionX2);
+                    DbGameAction actionX3 = Manager.GetActions().Where(x => (x.Identity == actionX2.IdNextfail) && (x.Identity != 0)).FirstOrDefault();
+                    if (actionX3 != null) listChildActions.Add(actionX3);
                 }
                 n++;
             } while (actionX != null && actionX.Identity != 0);

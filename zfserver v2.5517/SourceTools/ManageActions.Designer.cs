@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageActions));
             this.txtMainActionParam = new MetroFramework.Controls.MetroTextBox();
             this.panelActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.gridViewActions = new System.Windows.Forms.DataGridView();
             this.panelActions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewActions)).BeginInit();
             this.SuspendLayout();
             // 
             // txtMainActionParam
@@ -59,6 +59,7 @@
             this.txtMainActionParam.Multiline = true;
             this.txtMainActionParam.Name = "txtMainActionParam";
             this.txtMainActionParam.PasswordChar = '\0';
+            this.txtMainActionParam.ReadOnly = true;
             this.txtMainActionParam.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtMainActionParam.SelectedText = "";
             this.txtMainActionParam.SelectionLength = 0;
@@ -74,19 +75,19 @@
             // 
             // panelActions
             // 
-            this.panelActions.Controls.Add(this.dataGridView1);
+            this.panelActions.Controls.Add(this.gridViewActions);
             this.panelActions.Location = new System.Drawing.Point(23, 212);
             this.panelActions.Name = "panelActions";
             this.panelActions.Size = new System.Drawing.Size(616, 215);
             this.panelActions.TabIndex = 1;
             // 
-            // dataGridView1
+            // gridViewActions
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(612, 212);
-            this.dataGridView1.TabIndex = 0;
+            this.gridViewActions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridViewActions.Location = new System.Drawing.Point(3, 3);
+            this.gridViewActions.Name = "gridViewActions";
+            this.gridViewActions.Size = new System.Drawing.Size(612, 212);
+            this.gridViewActions.TabIndex = 0;
             // 
             // ManageActions
             // 
@@ -101,7 +102,7 @@
             this.Text = "ManageActions";
             this.Load += new System.EventHandler(this.ManageActions_Load);
             this.panelActions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewActions)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -110,6 +111,6 @@
 
         private MetroFramework.Controls.MetroTextBox txtMainActionParam;
         private System.Windows.Forms.FlowLayoutPanel panelActions;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView gridViewActions;
     }
 }
