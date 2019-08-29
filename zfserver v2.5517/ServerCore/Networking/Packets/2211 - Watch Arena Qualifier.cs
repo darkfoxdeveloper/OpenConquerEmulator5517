@@ -1,5 +1,5 @@
 ﻿// World Conquer Online Project 2.5517 - Phoenix Project Based
-// This project has been created by Felipe Vieira Vendramini
+// This project has been created by Felipe Vieira Vendramini and updated by Cristian Ocaña Soler
 // Source Infrastructure based on Phoenix Source, written by Gareth Jensen
 // This source is targeted to Conquer Online, client version 5517
 // 
