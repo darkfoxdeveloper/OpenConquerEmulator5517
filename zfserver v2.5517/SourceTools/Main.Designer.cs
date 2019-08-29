@@ -260,7 +260,7 @@ namespace SourceTools
             this.panelAttributes.Location = new System.Drawing.Point(526, 229);
             this.panelAttributes.Name = "panelAttributes";
             this.panelAttributes.Padding = new System.Windows.Forms.Padding(15, 10, 15, 10);
-            this.panelAttributes.Size = new System.Drawing.Size(506, 341);
+            this.panelAttributes.Size = new System.Drawing.Size(506, 554);
             this.panelAttributes.TabIndex = 13;
             // 
             // panelActions
@@ -272,7 +272,7 @@ namespace SourceTools
             this.panelActions.Location = new System.Drawing.Point(14, 229);
             this.panelActions.Name = "panelActions";
             this.panelActions.Padding = new System.Windows.Forms.Padding(15, 10, 15, 10);
-            this.panelActions.Size = new System.Drawing.Size(506, 341);
+            this.panelActions.Size = new System.Drawing.Size(506, 554);
             this.panelActions.TabIndex = 14;
             // 
             // dynamicInputsNPC
@@ -318,7 +318,7 @@ namespace SourceTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1042, 576);
+            this.ClientSize = new System.Drawing.Size(1042, 792);
             this.Controls.Add(this.btnManageActions);
             this.Controls.Add(this.btnSaveMainAction);
             this.Controls.Add(this.lblHelperNPCs);
