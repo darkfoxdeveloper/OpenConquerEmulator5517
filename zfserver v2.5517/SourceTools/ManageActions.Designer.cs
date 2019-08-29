@@ -98,6 +98,7 @@
             this.Controls.Add(this.panelActions);
             this.Controls.Add(this.txtMainActionParam);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ManageActions";
             this.Resizable = false;
             this.Text = "ManageActions";
