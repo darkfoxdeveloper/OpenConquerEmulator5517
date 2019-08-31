@@ -268,7 +268,8 @@ namespace MsgServer.Network.GameServer.Handlers
             {
                 ServerKernel.Log.GmLog("gm_command", string.Format("{0} => {1}", pClient.Character.Name, pMsg.Message));
 
-                string[] command = pMsg.Message.Split(new[] { ' ' }, 3);
+                string[] command = pMsg.Message.Split(new[] { ' ' }, 3); // Limited to 3. Not change this or the commands not working correctly.
+                string[] commandFullParameters = pMsg.Message.Split(' '); // Use this for working with all parameters
 
                 if (command.Length <= 0) return;
                 Character pRole = pClient.Character;
@@ -564,6 +565,51 @@ namespace MsgServer.Network.GameServer.Handlers
                                     pRole.Send(msg);
                                 }
                                 return;
+                            }
+                        #endregion
+                        #region AddNPC
+                        case "/addnpc":
+                            {
+                                if (commandFullParameters.Length >= 4)
+                                {
+                                    uint.TryParse(commandFullParameters[1], out uint NpcId);
+                                    string NpcName = commandFullParameters[2];
+                                    ushort.TryParse(commandFullParameters[3], out ushort NpcType);
+                                    ushort.TryParse(commandFullParameters[4], out ushort NpcLookface);
+                                    bool.TryParse(commandFullParameters[5], out bool NpcTemporal);
+
+                                    DbNpc npc = new DbNpc
+                                    {
+                                        Id = NpcId,
+                                        Name = commandFullParameters[2],
+                                        Mapid = pRole.Map.Identity,
+                                        Cellx = pRole.MapX,
+                                        Celly = pRole.MapY,
+                                        Type = NpcType,
+                                        Lookface = NpcLookface
+
+                                    };
+                                    GameNpc gameNPC = new GameNpc(npc);
+
+                                    if (pRole.Map.GameObjects.TryAdd(gameNPC.Identity, gameNPC))
+                                    {
+                                        if (NpcTemporal)
+                                        {
+                                            pRole.Send("NPC Added (Temporal)");
+                                        } else
+                                        {
+                                            Database.NpcRepository.SaveOrUpdate(npc);
+                                            pRole.Send("NPC Added and saved in Database");
+                                        }
+                                    } else
+                                    {
+                                        pRole.Send("NPC Cannot added. Error");
+                                    }
+                                } else
+                                {
+                                    pRole.Send("Command need parameters: /addnpc id name type lookface temporal(true/false)");
+                                }
+                                break;
                             }
                         #endregion
                         #region Msg Item
