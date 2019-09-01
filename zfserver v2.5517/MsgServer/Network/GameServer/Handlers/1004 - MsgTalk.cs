@@ -586,7 +586,7 @@ namespace MsgServer.Network.GameServer.Handlers
                                         Cellx = pRole.MapX,
                                         Celly = pRole.MapY,
                                         Type = NpcType,
-                                        Lookface = NpcLookface
+                                        Lookface = NpcLookface,
 
                                     };
                                     GameNpc gameNPC = new GameNpc(npc);
@@ -596,12 +596,21 @@ namespace MsgServer.Network.GameServer.Handlers
                                         if (NpcTemporal)
                                         {
                                             pRole.Send("NPC Added (Temporal)");
-                                        } else
-                                        {
-                                            Database.NpcRepository.SaveOrUpdate(npc);
-                                            pRole.Send("NPC Added and saved in Database");
                                         }
-                                    } else
+                                        else
+                                        {
+                                            pRole.Send("NPC Added (Temporal)");
+                                            //if (gameNPC.Save())
+                                            //{
+                                            //    pRole.Send("NPC Added and saved in Database");
+                                            //}
+                                            //else
+                                            //{
+                                            //    pRole.Send("NPC Added. Cannot be added in Database due a error.");
+                                            //}
+                                        }
+                                    }
+                                    else
                                     {
                                         pRole.Send("NPC Cannot added. Error");
                                     }

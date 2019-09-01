@@ -30,129 +30,210 @@ namespace MsgServer.Network.GameServer.Handlers
             uint requestedId = pMsg.TaskId;
             byte controlId = pMsg.OptionId;
 
-            switch (pMsg.InteractType)
+            #region Direct NPC Dialogs
+            if (pUser.Map.GameObjects.TryGetValue(pMsg.TaskId, out IScreenObject interactedNpc) || ServerKernel.Maps[5000].GameObjects.TryGetValue(pMsg.TaskId, out interactedNpc))
             {
-                // The message box does have the options OK and Cancel
-                case MsgTaskDialog.MESSAGE_BOX:
-                    {
-                        if (pUser.CaptchaBox != null)
+                pUser.InteractingNpc = interactedNpc;
+            }
+            if (pUser.InteractingNpc != null && pUser.InteractingNpc.Identity >= 60001 && pUser.InteractingNpc.Identity <= 70000)
+            {
+                TQDialog dialog = new TQDialog(pUser);
+                dialog.SetAvatar(0);
+                switch (pUser.InteractingNpc.Identity)
+                {
+                    case 60001:
                         {
-                            if (controlId == 0)
+                            dialog.SetAvatar(50);
+                            switch (controlId)
                             {
-                                pUser.CaptchaBox.OnCancel(pUser);
-                            }
-                            else
-                            {
-                                pUser.CaptchaBox.OnOk(pUser);
-                            }
-                            pUser.CaptchaBox = null;
-                        } 
-                        else if (pUser.RequestBox != null)
-                        {
-                            if (controlId == 0) // cancel
-                            {
-                                pUser.RequestBox.OnCancel(pUser);
-                            }
-                            else if (controlId == 255) // ok
-                            {
-                                pUser.RequestBox.OnOk(pUser);
-                            }
-                            pUser.RequestBox = null;
-                        }
-                        break;
-                    }
-                // This is what we receive when we click on OK of a Input box on a NPC
-                // Or a option of the NPC.
-                case MsgTaskDialog.ANSWER:
-                case MsgTaskDialog.TEXT_INPUT:
-                    {
-                        if (pMsg.InteractType == 102)
-                        {
-                            if (pUser.SyndicateIdentity <= 0)
-                                return;
-
-                            pUser.Syndicate.ExpelMember(pUser, pMsg.Text, true);
-                            return;
-                        }
-
-                        if (controlId == 255)
-                            break;
-
-                        INextAction action;
-                        if (pUser.NextActions.TryGetValue(controlId, out action))
-                        {
-                            pUser.NextActions.Clear();
-                            if (pUser.InteractingNpc != null &&
-                                (pUser.InteractingNpc.MapIdentity == 5000 ||
-                                 Calculations.InScreen(pUser.MapX, pUser.MapY,
-                                     pUser.InteractingNpc.MapX, pUser.InteractingNpc.MapY)))
-                            {
-                                if (pUser.InteractingNpc is GameNpc)
-                                {
-                                    var pNpc = pUser.InteractingNpc as GameNpc;
-                                    pUser.GameAction.ProcessAction(GetNextAction(pUser, action.Identity), pUser, pNpc, null,
-                                        action.IsInput ? pMsg.Text : null);
-                                }
-                                else if (pUser.InteractingNpc is DynamicNpc)
-                                {
-                                    var pNpc = pUser.InteractingNpc as DynamicNpc;
-                                    pUser.GameAction.ProcessAction(GetNextAction(pUser, action.Identity), pUser, pNpc, null,
-                                        action.IsInput ? pMsg.Text : null);
-                                }
-                            }
-                            else if (pUser.TaskItem != null)
-                            {
-                                pUser.GameAction.ProcessAction(GetNextAction(pUser, action.Identity), pUser, null, pUser.TaskItem,
-                                    action.IsInput ? pMsg.Text : null);
-                                pUser.TaskItem = null;
-                            }
-                        }
-                        break;
-                    }
-                default:
-                    {
-                        switch (controlId)
-                        {
-                            case 0:
-                                {
-                                    pUser.NextActions.Clear();
-                                    IScreenObject pNpc = null;
-                                    if (pUser.Map.GameObjects.TryGetValue(pMsg.TaskId, out pNpc)
-                                        || ServerKernel.Maps[5000].GameObjects.TryGetValue(pMsg.TaskId, out pNpc))
+                                case 0:
                                     {
-                                        pUser.GameAction.ProcessAction(GetActionIdentity(pUser, pNpc), pUser, pNpc, null,
-                                            "");
+                                        dialog.AddText("Hello " + pUser.Name + ", I need help with some monsters in twin city. You can help me?");
+                                        dialog.AddOption("Oh yes of course.", 1);
+                                        dialog.AddOption("Sorry...", 255);
+                                        dialog.Show();
+                                        break;
+                                    }
+                                case 1:
+                                    {
+                                        if (pUser.Level <= 15)
+                                        {
+                                            var cloudSaintsJar = pUser.Inventory.GetByType(SpecialItem.CLOUDSAINTS_JAIR);
+                                            if (cloudSaintsJar == null)
+                                            {
+                                                if (pUser.Inventory.CreateJar(1, 30))
+                                                {
+                                                    dialog.AddText("Here is your CloudSaint's Jar for follow the quest!");
+                                                    dialog.AddOption("Oh Thanks", 255);
+                                                }
+                                            } else
+                                            {
+                                                if (cloudSaintsJar.Durability >= 1)
+                                                {
+                                                    dialog.AddText("You finished. Thanks for you help.");
+                                                    dialog.AddOption("Thank you!", 255);
+                                                    pUser.Inventory.Remove(cloudSaintsJar.Identity);
+                                                    pUser.QuestKills = 0;
+                                                } else
+                                                {
+                                                    dialog.AddText("You already have the CloudSaint's Jar.");
+                                                    dialog.AddOption("Oh Thanks", 255);
+                                                }
+                                            }
+                                        } else
+                                        {
+                                            dialog.AddText("You can help my brother in Phoenix City. This monsters is for level 15 or less only.");
+                                            dialog.AddOption("Oh ok...", 255);
+                                        }
+                                        dialog.Show();
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        pUser.InteractingNpc = null;
+                                        break;
+                                    }
+                            }
+                            break;
+                        }
+                    default:
+                        {
+                            dialog.SetAvatar(1);
+                            dialog.AddText("Sorry but this npc not have dialog");
+                            dialog.AddOption(":(", 255);
+                            dialog.Show();
+                            break;
+                        }
+                }
+            }
+            #endregion
+            #region Database NPC Dialogs
+            else
+            {
+                switch (pMsg.InteractType)
+                {
+                    // The message box does have the options OK and Cancel
+                    case MsgTaskDialog.MESSAGE_BOX:
+                        {
+                            if (pUser.CaptchaBox != null)
+                            {
+                                if (controlId == 0)
+                                {
+                                    pUser.CaptchaBox.OnCancel(pUser);
+                                }
+                                else
+                                {
+                                    pUser.CaptchaBox.OnOk(pUser);
+                                }
+                                pUser.CaptchaBox = null;
+                            }
+                            else if (pUser.RequestBox != null)
+                            {
+                                if (controlId == 0) // cancel
+                                {
+                                    pUser.RequestBox.OnCancel(pUser);
+                                }
+                                else if (controlId == 255) // ok
+                                {
+                                    pUser.RequestBox.OnOk(pUser);
+                                }
+                                pUser.RequestBox = null;
+                            }
+                            break;
+                        }
+                    // This is what we receive when we click on OK of a Input box on a NPC
+                    // Or a option of the NPC.
+                    case MsgTaskDialog.ANSWER:
+                    case MsgTaskDialog.TEXT_INPUT:
+                        {
+                            if (pMsg.InteractType == 102)
+                            {
+                                if (pUser.SyndicateIdentity <= 0)
+                                    return;
+
+                                pUser.Syndicate.ExpelMember(pUser, pMsg.Text, true);
+                                return;
+                            }
+
+                            if (controlId == 255)
+                                break;
+
+                            INextAction action;
+                            if (pUser.NextActions.TryGetValue(controlId, out action))
+                            {
+                                pUser.NextActions.Clear();
+                                if (pUser.InteractingNpc != null &&
+                                    (pUser.InteractingNpc.MapIdentity == 5000 ||
+                                     Calculations.InScreen(pUser.MapX, pUser.MapY,
+                                         pUser.InteractingNpc.MapX, pUser.InteractingNpc.MapY)))
+                                {
+                                    if (pUser.InteractingNpc is GameNpc)
+                                    {
+                                        var pNpc = pUser.InteractingNpc as GameNpc;
+                                        pUser.GameAction.ProcessAction(GetNextAction(pUser, action.Identity), pUser, pNpc, null,
+                                            action.IsInput ? pMsg.Text : null);
+                                    }
+                                    else if (pUser.InteractingNpc is DynamicNpc)
+                                    {
+                                        var pNpc = pUser.InteractingNpc as DynamicNpc;
+                                        pUser.GameAction.ProcessAction(GetNextAction(pUser, action.Identity), pUser, pNpc, null,
+                                            action.IsInput ? pMsg.Text : null);
                                     }
                                 }
-                                break;
-                            /*case 12:
-                        {
-                            Dialog = new TQDialog(client);
-                            NpcSpawn npc;
-                            if (!client.Map.NPCs.TryGetValue(requestedId, out npc))
-                                break;
-                            ExecuteTask(client, npc);
+                                else if (pUser.TaskItem != null)
+                                {
+                                    pUser.GameAction.ProcessAction(GetNextAction(pUser, action.Identity), pUser, null, pUser.TaskItem,
+                                        action.IsInput ? pMsg.Text : null);
+                                    pUser.TaskItem = null;
+                                }
+                            }
                             break;
-                        }*/
-                            case 255:
-                                {
-                                    // Close Dialog
-                                    pUser.InteractingNpc = null;
-                                    pUser.NextActions.Clear();
-                                    break;
-                                }
-                            default:
-                                {
-                                    pUser.InteractingNpc = null;
-                                    pUser.NextActions.Clear();
-                                    ServerKernel.Log.SaveLog(string.Format("Npc interact type default [{0}] not handled.", controlId), false, LogType.WARNING);
-                                    break;
-                                }
                         }
-
-                        break;
-                    }
-            }           
+                    default:
+                        {
+                            switch (controlId)
+                            {
+                                case 0:
+                                    {
+                                        pUser.NextActions.Clear();
+                                        IScreenObject pNpc = null;
+                                        if (pUser.Map.GameObjects.TryGetValue(pMsg.TaskId, out pNpc)
+                                            || ServerKernel.Maps[5000].GameObjects.TryGetValue(pMsg.TaskId, out pNpc))
+                                        {
+                                            pUser.GameAction.ProcessAction(GetActionIdentity(pUser, pNpc), pUser, pNpc, null,
+                                                "");
+                                        }
+                                    }
+                                    break;
+                                /*case 12:
+                                {
+                                    Dialog = new TQDialog(client);
+                                    NpcSpawn npc;
+                                    if (!client.Map.NPCs.TryGetValue(requestedId, out npc))
+                                        break;
+                                    ExecuteTask(client, npc);
+                                    break;
+                                }*/
+                                case 255:
+                                    {
+                                        // Close Dialog
+                                        pUser.InteractingNpc = null;
+                                        pUser.NextActions.Clear();
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        pUser.InteractingNpc = null;
+                                        pUser.NextActions.Clear();
+                                        ServerKernel.Log.SaveLog(string.Format("Npc interact type default [{0}] not handled.", controlId), false, LogType.WARNING);
+                                        break;
+                                    }
+                            }
+                            break;
+                        }
+                }
+            }
+            #endregion
         }
 
         private static uint GetNextAction(Character pUser, uint idAction)

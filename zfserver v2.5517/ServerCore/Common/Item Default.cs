@@ -86,6 +86,8 @@ namespace ServerCore.Common
 
         public const uint OBLIVION_DEW = 711083;
         public const uint MEMORY_AGATE = 720828;
+
+        public const uint CLOUDSAINTS_JAIR = 750000;
     }
 
     public enum ItemSort

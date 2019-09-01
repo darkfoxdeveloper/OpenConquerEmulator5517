@@ -208,6 +208,7 @@
     <Compile Include="Structures\Team.cs" />
     <Compile Include="Structures\Tournament\Tournament Matches.cs" />
     <Compile Include="Structures\Tournament\Tournament Structure.cs" />
+    <Compile Include="Structures\TQDialog.cs" />
     <Compile Include="Structures\Trade Partner.cs" />
     <Compile Include="Structures\Trade.cs" />
     <Compile Include="Structures\Transformation.cs" />

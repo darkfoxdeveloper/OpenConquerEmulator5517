@@ -167,6 +167,62 @@ namespace MsgServer.Structures.Items
             return false;
         }
 
+        public bool CreateJar(ushort typeMonster = 0, ushort requiredKills = 0)
+        {
+            if (IsFull) return false;
+
+            DbItemtype itemInfo;
+            if (ServerKernel.Itemtype.TryGetValue(SpecialItem.CLOUDSAINTS_JAIR, out itemInfo))
+            {
+                var pItem = new DbItem
+                {
+                    AddLife = 0,
+                    AddlevelExp = 0,
+                    AntiMonster = 0,
+                    ArtifactExpire = 0,
+                    ArtifactType = 0,
+                    ArtifactStabilization = 0,
+                    ArtifactStart = 0,
+                    ChkSum = 0,
+                    Color = 3,
+                    Data = 0,
+                    Gem1 = 0,
+                    Gem2 = 0,
+                    Ident = 0,
+                    Magic1 = 0,
+                    Magic2 = 0,
+                    ReduceDmg = 0,
+                    Plunder = 0,
+                    Specialflag = 0,
+                    Inscribed = 0,
+                    StackAmount = 1,
+                    RefineryExpire = 0,
+                    RefineryLevel = 0,
+                    RefineryType = 0,
+                    RefineryStart = 0,
+                    RefineryStabilization = 0,
+                    Type = itemInfo.Type,
+                    Position = 0,
+                    PlayerId = m_pOwner.Identity,
+                    Monopoly = 0,
+                    Magic3 = itemInfo.Magic3,
+                    Amount = requiredKills,
+                    AmountLimit = typeMonster
+                };
+
+                var newItem = new Item(m_pOwner, pItem);
+                newItem.Save();
+                if (Add(newItem))
+                {
+                    ServerKernel.Log.GmLog("item_creation", string.Format("SYSTEM created for user item Item [Id:{0}][Type:{8}][Pos:{9}][Plus:{1}][Dura:{2}/{3}][Enchant:{4}][Bless:{5}][Plunder:{6}][Data:{7}]"
+                                , pItem.Id, pItem.Magic3, pItem.Amount, pItem.AmountLimit, pItem.AddLife, pItem.ReduceDmg,
+                                pItem.Plunder, pItem.Data, pItem.Type, pItem.Position));
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public bool Create(DbItem item)
         {
             if (IsFull)

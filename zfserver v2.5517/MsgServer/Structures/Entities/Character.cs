@@ -197,6 +197,8 @@ namespace MsgServer.Structures.Entities
         private byte m_pBlessPoints;
         private uint m_dwBlessEndTime;
         private uint m_dwLuckyTime;
+        // quest cloud saint's jar
+        public uint QuestKills = 0;
         // qualifiers
         
 
