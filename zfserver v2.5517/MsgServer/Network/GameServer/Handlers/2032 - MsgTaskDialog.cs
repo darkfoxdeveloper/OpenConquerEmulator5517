@@ -80,29 +80,39 @@ namespace MsgServer.Network.GameServer.Handlers
 
                                         if (pUser.Level <= 20)
                                         {
-                                            var cloudSaintsJar = pUser.Inventory.GetByType(SpecialItem.CLOUDSAINTS_JAIR);
-                                            if (cloudSaintsJar == null)
+                                            if (pUser.QuestCompleted <= 0)
                                             {
-                                                if (pUser.Inventory.CreateJar(monsterType, requiredKills))
+                                                var cloudSaintsJar = pUser.Inventory.GetByType(SpecialItem.CLOUDSAINTS_JAIR);
+                                                if (cloudSaintsJar == null)
                                                 {
-                                                    pUser.QuestKills = 0;
-                                                    dialog.AddText("Here is your CloudSaint's Jar for follow the quest!");
-                                                    dialog.AddOption("Oh Thanks", 255);
+                                                    if (pUser.Inventory.CreateJar(monsterType, requiredKills))
+                                                    {
+                                                        pUser.QuestKills = 0;
+                                                        pUser.QuestCompleted = 0;
+                                                        dialog.AddText("Here is your CloudSaint's Jar for follow the quest!");
+                                                        dialog.AddOption("Oh Thanks", 255);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (pUser.QuestKills >= requiredKills)
+                                                    {
+                                                        dialog.AddText("You finished. Thanks for you help.");
+                                                        dialog.AddOption("Thank you!", 255);
+                                                        pUser.Inventory.Remove(cloudSaintsJar.Identity);
+                                                        pUser.QuestKills = 0;
+                                                        pUser.QuestCompleted = monsterType;
+                                                    }
+                                                    else
+                                                    {
+                                                        dialog.AddText("You already have the CloudSaint's Jar. You have killed " + pUser.QuestKills + "/" + requiredKills + " monsters");
+                                                        dialog.AddOption("Oh Thanks", 255);
+                                                    }
                                                 }
                                             } else
                                             {
-                                                if (pUser.QuestKills >= 30)
-                                                {
-                                                    dialog.AddText("You finished. Thanks for you help.");
-                                                    dialog.AddOption("Thank you!", 255);
-                                                    pUser.Inventory.Remove(cloudSaintsJar.Identity);
-                                                    pUser.QuestKills = 0;
-                                                    pUser.QuestCompleted = monsterType;
-                                                } else
-                                                {
-                                                    dialog.AddText("You already have the CloudSaint's Jar. You have killed " + pUser.QuestKills + "/" + requiredKills + " monsters");
-                                                    dialog.AddOption("Oh Thanks", 255);
-                                                }
+                                                dialog.AddText("You cannot help more today. Thanks for your work!");
+                                                dialog.AddOption("I come tomorrow.", 255);
                                             }
                                         } else
                                         {
