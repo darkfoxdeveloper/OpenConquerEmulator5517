@@ -199,6 +199,7 @@ namespace MsgServer.Structures.Entities
         private uint m_dwLuckyTime;
         // quest cloud saint's jar
         public uint QuestKills = 0;
+        public uint QuestCompleted = 0;
         // qualifiers
         
 

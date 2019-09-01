@@ -261,7 +261,6 @@ namespace MsgServer.Network.GameServer.Handlers
                             // TODO Only temporal for now. Not saved in database. Need check on every kill monster if are correct type of monster and then increment pRole.QuestKills
                             pMsg.Amount = pRole.QuestKills;
                             pRole.Send(pMsg);
-                            pRole.Send("Loading ACT_ITR_INCREASE_JAR Interaction. In develop progress");
                             break;
                         }
 

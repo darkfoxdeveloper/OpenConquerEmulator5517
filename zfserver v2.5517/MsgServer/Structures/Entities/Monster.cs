@@ -1009,6 +1009,20 @@ namespace MsgServer.Structures.Entities
                 if (!DropItem(itemtype, idMapItemOwner, nPlus, nDmg, 0, (short)Calculations.Random.Next(-200, 300)))
                     break;
             }
+
+            #region CloudSaint's Jar Kills
+            if (pRole.IsPlayer())
+            {
+                Character pUser = pRole as Character;
+                Item cloudSaintsJar = pUser.Inventory.GetByType(SpecialItem.CLOUDSAINTS_JAIR);
+                if (cloudSaintsJar != null)
+                {
+                    if (cloudSaintsJar.MaximumDurability == m_dbMonster.Id) {
+                        pUser.QuestKills++;
+                    }
+                }
+            }
+            #endregion
         }
 
         public bool DropItem(uint idItemtype, uint idOwner, byte nMagic3, byte nBless, byte nEnchant,

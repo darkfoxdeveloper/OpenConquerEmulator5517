@@ -9,11 +9,11 @@
 // Last Edit: 2016/12/27 15:29
 // Created: 2016/12/07 00:27
 
-using System.Linq;
 using MsgServer.Structures.Entities;
 using MsgServer.Structures.Interfaces;
 using ServerCore.Common;
 using ServerCore.Networking.Packets;
+using System.Linq;
 
 namespace MsgServer.Network.GameServer.Handlers
 {
@@ -56,33 +56,57 @@ namespace MsgServer.Network.GameServer.Handlers
                                     }
                                 case 1:
                                     {
-                                        if (pUser.Level <= 15)
+                                        dialog.AddText("Choose type of monster you can help me.");
+                                        dialog.AddOption("Pheasant (Lv1)", 2);
+                                        dialog.AddOption("Turtledove (Lv7)", 3);
+                                        dialog.AddOption("Robin (Lv12)", 4);
+                                        dialog.AddOption("Apparition (Lv17)", 5);
+                                        dialog.AddOption("In other time...", 255);
+                                        dialog.Show();
+                                        break;
+                                    }
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    {
+                                        ushort monsterType = System.Convert.ToUInt16(controlId);
+                                        monsterType--;
+                                        ushort requiredKills = 30;
+                                        if (monsterType > 1)
+                                        {
+                                            requiredKills = 100;
+                                        }
+
+                                        if (pUser.Level <= 20)
                                         {
                                             var cloudSaintsJar = pUser.Inventory.GetByType(SpecialItem.CLOUDSAINTS_JAIR);
                                             if (cloudSaintsJar == null)
                                             {
-                                                if (pUser.Inventory.CreateJar(1, 30))
+                                                if (pUser.Inventory.CreateJar(monsterType, requiredKills))
                                                 {
+                                                    pUser.QuestKills = 0;
                                                     dialog.AddText("Here is your CloudSaint's Jar for follow the quest!");
                                                     dialog.AddOption("Oh Thanks", 255);
                                                 }
                                             } else
                                             {
-                                                if (cloudSaintsJar.Durability >= 1)
+                                                if (pUser.QuestKills >= 30)
                                                 {
                                                     dialog.AddText("You finished. Thanks for you help.");
                                                     dialog.AddOption("Thank you!", 255);
                                                     pUser.Inventory.Remove(cloudSaintsJar.Identity);
                                                     pUser.QuestKills = 0;
+                                                    pUser.QuestCompleted = monsterType;
                                                 } else
                                                 {
-                                                    dialog.AddText("You already have the CloudSaint's Jar.");
+                                                    dialog.AddText("You already have the CloudSaint's Jar. You have killed " + pUser.QuestKills + "/" + requiredKills + " monsters");
                                                     dialog.AddOption("Oh Thanks", 255);
                                                 }
                                             }
                                         } else
                                         {
-                                            dialog.AddText("You can help my brother in Phoenix City. This monsters is for level 15 or less only.");
+                                            dialog.AddText("You can help my brother in Phoenix City. This monsters is for level 20 or less only.");
                                             dialog.AddOption("Oh ok...", 255);
                                         }
                                         dialog.Show();
@@ -90,7 +114,7 @@ namespace MsgServer.Network.GameServer.Handlers
                                     }
                                 default:
                                     {
-                                        pUser.InteractingNpc = null;
+                                        //pUser.InteractingNpc = null;
                                         break;
                                     }
                             }
