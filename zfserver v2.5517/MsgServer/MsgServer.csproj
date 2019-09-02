@@ -191,6 +191,7 @@
     <Compile Include="Structures\Player Booth.cs" />
     <Compile Include="Structures\Qualifier\Arena Engine.cs" />
     <Compile Include="Structures\Qualifier\Arena Match.cs" />
+    <Compile Include="Structures\QuestJar.cs" />
     <Compile Include="Structures\Quiz Show User Object.cs" />
     <Compile Include="Structures\Relationship.cs" />
     <Compile Include="Structures\Request Box.cs" />

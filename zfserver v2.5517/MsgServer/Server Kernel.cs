@@ -132,7 +132,7 @@ namespace MsgServer
         public static ConcurrentDictionary<uint, Family> Families = new ConcurrentDictionary<uint, Family>();
         public static ConcurrentDictionary<uint, QualifierRankObj> ArenaRecord = new ConcurrentDictionary<uint, QualifierRankObj>();
         public static ConcurrentDictionary<uint, DetainedObject> DetainedObjects = new ConcurrentDictionary<uint, DetainedObject>();
-
+        public static List<QuestJar> PlayerQuests = new List<QuestJar> ();
         #endregion
 
         #region Event Configuration

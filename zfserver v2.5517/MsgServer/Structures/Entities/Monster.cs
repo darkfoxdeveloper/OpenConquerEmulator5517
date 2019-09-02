@@ -1014,19 +1014,22 @@ namespace MsgServer.Structures.Entities
             if (pRole.IsPlayer())
             {
                 Character pUser = pRole as Character;
-                Item cloudSaintsJar = pUser.Inventory.GetByType(SpecialItem.CLOUDSAINTS_JAIR);
-                if (cloudSaintsJar != null)
+                QuestJar quest = ServerKernel.PlayerQuests.Where(x => x.Player.Identity == pUser.Identity && x.Monster.Id == m_dbMonster.Id).FirstOrDefault();
+                if (quest == null)
                 {
-                    if (cloudSaintsJar.MaximumDurability == m_dbMonster.Id) {
-                        pUser.QuestKills++;
-                    }
+                    quest = new QuestJar(pUser, m_dbMonster) { };
+                    quest.AddKills();
+                    ServerKernel.PlayerQuests.Add(quest);
+                }
+                else
+                {
+                    quest.AddKills();
                 }
             }
             #endregion
         }
 
-        public bool DropItem(uint idItemtype, uint idOwner, byte nMagic3, byte nBless, byte nEnchant,
-            short sExtraDura)
+        public bool DropItem(uint idItemtype, uint idOwner, byte nMagic3, byte nBless, byte nEnchant, short sExtraDura)
         {
             DbItemtype db;
             if (ServerKernel.Itemtype.TryGetValue(idItemtype, out db))

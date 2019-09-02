@@ -10,6 +10,8 @@
 // Created: 2016/12/07 01:37
 
 using System;
+using System.Linq;
+using MsgServer.Structures;
 using MsgServer.Structures.Entities;
 using ServerCore.Common;
 using ServerCore.Common.Enums;
@@ -256,13 +258,19 @@ namespace MsgServer.Network.GameServer.Handlers
                 }
 
                 #endregion
+                    #region 36 - QuestJar
                     case InteractionType.ACT_ITR_INCREASE_JAR:
-                        {
-                            // TODO Only temporal for now. Not saved in database. Need check on every kill monster if are correct type of monster and then increment pRole.QuestKills
-                            pMsg.Amount = pRole.QuestKills;
-                            pRole.Send(pMsg);
-                            break;
-                        }
+                            {
+                                // TODO Only temporal for now. But allowed login/logout the player.
+                                QuestJar quest = ServerKernel.PlayerQuests.Where(x => x.Player.Identity == pRole.Identity).FirstOrDefault();
+                                if (quest != null)
+                                {
+                                    pMsg.Amount = quest.Kills;
+                                }
+                                pRole.Send(pMsg);
+                                break;
+                            }
+                    #endregion
 
                 default:
                     ServerKernel.Log.SaveLog("Missing Interaction Type: " + pMsg.Action, true, "itr_msg",

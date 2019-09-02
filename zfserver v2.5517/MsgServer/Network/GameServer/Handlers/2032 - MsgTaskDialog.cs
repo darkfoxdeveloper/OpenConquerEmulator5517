@@ -9,8 +9,10 @@
 // Last Edit: 2016/12/27 15:29
 // Created: 2016/12/07 00:27
 
+using MsgServer.Structures;
 using MsgServer.Structures.Entities;
 using MsgServer.Structures.Interfaces;
+using MsgServer.Structures.Items;
 using ServerCore.Common;
 using ServerCore.Networking.Packets;
 using System.Linq;
@@ -56,12 +58,19 @@ namespace MsgServer.Network.GameServer.Handlers
                                     }
                                 case 1:
                                     {
-                                        dialog.AddText("Choose type of monster you can help me.");
-                                        dialog.AddOption("Pheasant (Lv1)", 2);
-                                        dialog.AddOption("Turtledove (Lv7)", 3);
-                                        dialog.AddOption("Robin (Lv12)", 4);
-                                        dialog.AddOption("Apparition (Lv17)", 5);
-                                        dialog.AddOption("In other time...", 255);
+                                        if (QuestJarManager.QuestsFinished(pUser).Count() >= 3) // Already completed 3 or more quests
+                                        {
+                                            dialog.AddText("Sorry but cannot help me more today. Come back tomorrow!");
+                                            dialog.AddOption("Oh...", 255);
+                                        } else
+                                        {
+                                            dialog.AddText("Choose type of monster you can help me.");
+                                            dialog.AddOption("Pheasant (Lv1)", 2);
+                                            dialog.AddOption("Turtledove (Lv7)", 3);
+                                            dialog.AddOption("Robin (Lv12)", 4);
+                                            dialog.AddOption("Apparition (Lv17)", 5);
+                                            dialog.AddOption("In other time...", 255);
+                                        }
                                         dialog.Show();
                                         break;
                                     }
@@ -80,39 +89,41 @@ namespace MsgServer.Network.GameServer.Handlers
 
                                         if (pUser.Level <= 20)
                                         {
-                                            if (pUser.QuestCompleted <= 0)
+                                            QuestJar quest = QuestJarManager.CurrentQuest(pUser);
+                                            Item cloudSaintsJar = pUser.Inventory.GetByType(SpecialItem.CLOUDSAINTS_JAIR);
+                                            if (quest == null)
                                             {
-                                                var cloudSaintsJar = pUser.Inventory.GetByType(SpecialItem.CLOUDSAINTS_JAIR);
                                                 if (cloudSaintsJar == null)
                                                 {
                                                     if (pUser.Inventory.CreateJar(monsterType, requiredKills))
                                                     {
-                                                        pUser.QuestKills = 0;
-                                                        pUser.QuestCompleted = 0;
+                                                        QuestJarManager.NewQuest(pUser, monsterType);
                                                         dialog.AddText("Here is your CloudSaint's Jar for follow the quest!");
-                                                        dialog.AddOption("Oh Thanks", 255);
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    if (pUser.QuestKills >= requiredKills)
-                                                    {
-                                                        dialog.AddText("You finished. Thanks for you help.");
-                                                        dialog.AddOption("Thank you!", 255);
-                                                        pUser.Inventory.Remove(cloudSaintsJar.Identity);
-                                                        pUser.QuestKills = 0;
-                                                        pUser.QuestCompleted = monsterType;
-                                                    }
-                                                    else
-                                                    {
-                                                        dialog.AddText("You already have the CloudSaint's Jar. You have killed " + pUser.QuestKills + "/" + requiredKills + " monsters");
                                                         dialog.AddOption("Oh Thanks", 255);
                                                     }
                                                 }
                                             } else
                                             {
-                                                dialog.AddText("You cannot help more today. Thanks for your work!");
-                                                dialog.AddOption("I come tomorrow.", 255);
+                                                if (quest.Finished)
+                                                {
+                                                    dialog.AddText("You cannot help more today. Thanks for your work!");
+                                                    dialog.AddOption("I come tomorrow.", 255);
+                                                } else
+                                                {
+                                                    if (quest.IsFinished(true))
+                                                    {
+                                                        dialog.AddText("You finished. Thanks for you help.");
+                                                        dialog.AddOption("Thank you!", 255);
+                                                    } else
+                                                    {
+                                                        dialog.AddText("You have killed " + quest.Kills + "/" + quest.RequiredKills + " " + quest.Monster.Name);
+                                                        if (cloudSaintsJar == null)
+                                                        {
+                                                            dialog.AddOption("I Lost the CloudSaint'sJar", 6);
+                                                        }
+                                                        dialog.AddOption("Oh Thanks", 255);
+                                                    }
+                                                }
                                             }
                                         } else
                                         {
@@ -122,9 +133,14 @@ namespace MsgServer.Network.GameServer.Handlers
                                         dialog.Show();
                                         break;
                                     }
-                                default:
+                                case 6:
                                     {
-                                        //pUser.InteractingNpc = null;
+                                        QuestJar quest = QuestJarManager.CurrentQuest(pUser);
+                                        
+                                        pUser.Inventory.CreateJar((ushort)quest.Monster.Id, (ushort)quest.RequiredKills);
+                                        dialog.AddText("Here is your CloudSaint's Jar for follow the quest!");
+                                        dialog.AddOption("Oh Thanks", 255);
+                                        dialog.Show();
                                         break;
                                     }
                             }
