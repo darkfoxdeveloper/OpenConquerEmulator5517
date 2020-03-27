@@ -6166,6 +6166,7 @@ namespace MsgServer.Structures.Entities
                 var pMapItem = new MapItem();
                 if (pMapItem.Create((uint)Map.FloorItem, Map, pos, pItem, Identity))
                 {
+                    pItem.Save();
                     //Map.AddItem(pMapItem);
                 }
                 else
